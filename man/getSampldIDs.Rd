@@ -6,7 +6,15 @@
 \usage{
 getSampldIDs(otutable_filename)
 }
-\description{
-getSampldIDs
+\arguments{
+\item{otu_table}{Your OTU Table.}
 }
+\description{
+This function retrieves Sample IDs from the OTU table.
+}
+\examples{
+SampleIDs = getSampldIDs("otu_table.txt")
+}
+\keyword{OTU}
+\keyword{sampleIDs}
 
