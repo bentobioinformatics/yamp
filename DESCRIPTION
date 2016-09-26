@@ -4,7 +4,7 @@ Title: Yet Another Metagenomics Package
 Version: 0.1.0
 Author: Dr. Bento
 Maintainer: Dr. Bento <bentobioinformatics@gmail.com>
-Description: Do you work with text files exported from Biom? This package is intended to make life easy for those who do.
+Description: Do you work with text files exported from Biom? This package is intended to make life easy for those who do. https://github.com/bentobioinformatics/yamp
 License: F4A
 LazyData: TRUE
 RoxygenNote: 5.0.1

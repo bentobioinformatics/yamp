@@ -1,18 +1,14 @@
 #' getSampldIDs
 #'
-#' This function retrieves Sample IDs from the OTU table.
+#' This function retrieves Sample IDs from the OTU table. The OTU table must be derived from biom.
 #' @param otu_table Your OTU Table.
 #' @keywords OTU sampleIDs
 #' @export
 #' @examples
 #' SampleIDs = getSampldIDs("otu_table.txt")
-getSampldIDs <- function (otu_table) {
+getSampldIDs <- function (.otu_table) {
   print("reading...")
-  header <- scan(otu_table, skip = 1, nlines = 1, what = character(), sep = "\t")
+  header = scan(.otu_table, skip = 1, nlines = 1, what = character(), sep = "\t")
   header = header[2:(length(header)-1)]
   header
 }
-
-
-
-
