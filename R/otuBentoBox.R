@@ -21,7 +21,7 @@ setMethod(f = "initialize",
 
             if (missing(f_otutable) || missing(f_filename)) stop("input missing.")
 
-            # THE_otutable will usually have taxonomy column, so it will have one more column than THE_meta_expmt.
+            # otutable will usually have taxonomy column, so it will have one more column than metaexpmt.
             otutable = read.delim(file = f_otutable, sep = "\t", header = T, check.names = F, row.names = 1, quote = "#")
             metadata = read.delim(file = f_filename, sep = "\t", header = T, check.names = F)
             # dim(otutable); dim(metadata)
@@ -31,8 +31,8 @@ setMethod(f = "initialize",
             taxonomy$taxonomy = (gsub("; ", ";", taxonomy$taxonomy))
             taxonomy$taxonomy = (gsub("\\.", "", taxonomy$taxonomy))
 
-            # Remove taxonomy from The OTU Table.
-            THE_otutable$taxonomy <- NULL
+            # Remove taxonomy from OTU Table.
+            otutable$taxonomy <- NULL
 
             # Taxonomy into 7 ranks
             # install.packages(c("tidyr", "devtools"))
