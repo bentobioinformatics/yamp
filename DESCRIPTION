@@ -7,3 +7,4 @@ Maintainer: Dr. Bento <bentobioinformatics@gmail.com>
 Description: Biom - Microbial ecology
 License: F4A
 LazyData: TRUE
+RoxygenNote: 5.0.1
