@@ -2,6 +2,7 @@
 
 export(getSampleNames)
 export(otuBentoBox)
+export(removeSamplesFromBentoBox)
 export(removeTaxaFromBentoBox)
 export(retainTaxaFromBentoBox)
 exportClasses(otuBentoBox)

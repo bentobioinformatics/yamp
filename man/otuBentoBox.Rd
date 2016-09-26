@@ -2,6 +2,7 @@
 % Please edit documentation in R/otuBentoBox.R
 \name{otuBentoBox}
 \alias{otuBentoBox}
+\alias{removeSamplesFromBentoBox}
 \alias{removeTaxaFromBentoBox}
 \alias{retainTaxaFromBentoBox}
 \title{Remove taxa from an OTU Bento Box}
@@ -9,6 +10,8 @@
 removeTaxaFromBentoBox(bentoBox, classificationLevel, nameToRemove)
 
 retainTaxaFromBentoBox(bentoBox, classificationLevel, nameToRemove)
+
+removeSamplesFromBentoBox(bentoBox, samplesToRemove)
 }
 \arguments{
 \item{bentoBox}{Your Bento Box}
@@ -22,14 +25,21 @@ retainTaxaFromBentoBox(bentoBox, classificationLevel, nameToRemove)
 \item{classificationLevel}{Your classificationLevel}
 
 \item{nameToRetain}{Names to remove}
+
+\item{bentoBox}{Your Bento Box}
+
+\item{samples}{Samples to remove from Your Bento Box}
 }
 \description{
 Remove taxa from an OTU Bento Box
 
 Retain taxa from an OTU Bento Box
+
+Remove whole samples from an OTU Bento Box
 }
 \examples{
 aNewBentoBox = removeTaxaFromBentoBox(aBentoBox, "k", "k__Bacteria")
 aNewBentoBox = retainTaxaFromBentoBox(aBentoBox, "k", "k__Bacteria")
+aNewBentoBox = removeSamplesFromBentoBox(aBentoBox, c("Sample1", "Sample2"))
 }
 
