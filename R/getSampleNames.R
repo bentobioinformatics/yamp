@@ -6,9 +6,9 @@
 #' @export
 #' @examples
 #' sampleNames = getSampleNames("otu_table.txt")
-getSampleNames <- function (.otu_table) {
+getSampleNames <- function (.f_otu_table) {
   print("reading...")
-  header = scan(.otu_table, skip = 1, nlines = 1, what = character(), sep = "\t")
+  header = scan(.f_otu_table, skip = 1, nlines = 1, what = character(), sep = "\t")
   header = header[2:(length(header)-1)]
   header
 }
