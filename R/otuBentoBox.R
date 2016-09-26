@@ -118,7 +118,6 @@ removeTaxaFromBentoBox <- function (bentoBox, classificationLevel, nameToRemove)
 #' aNewBentoBox = retainTaxaFromBentoBox(aBentoBox, "k", "k__Bacteria")
 retainTaxaFromBentoBox <- function (bentoBox, classificationLevel, nameToRemove) {
   OTUsToExclude = rownames(bentoBox@taxonomy[ bentoBox@taxonomy[[classificationLevel]] == nameToRemove, ])
-  print(OTUsToExclude)
   bentoBox@otutable = bentoBox@otutable[rownames(bentoBox@otutable) %in% OTUsToExclude, ]
   bentoBox@taxonomy = bentoBox@taxonomy[rownames(bentoBox@taxonomy) %in% OTUsToExclude, ]
   return(bentoBox)
