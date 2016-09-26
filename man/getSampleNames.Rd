@@ -4,13 +4,13 @@
 \alias{getSampleNames}
 \title{getSampleNames}
 \usage{
-getSampleNames(.f_otu_table)
+getSampleNames(file)
 }
 \arguments{
-\item{otu_table}{OTU Table file}
+\item{file}{the name of the OTU table file which the data are to be read from. The OTU table must have derived from biom.}
 }
 \description{
-This function retrieves sample names from the OTU table. The OTU table must be derived from biom.
+This function retrieves sample names from the OTU table.
 }
 \examples{
 sampleNames = getSampleNames("otu_table.txt")
