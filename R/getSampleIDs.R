@@ -1,7 +1,6 @@
 #' getSampldIDs
 #'
 #' This function retrieves Sample IDs from the OTU table.
-#' @name getSampldIDs
 #' @param otu_table Your OTU Table.
 #' @keywords OTU sampleIDs
 #' @export
