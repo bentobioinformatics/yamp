@@ -17,31 +17,31 @@ setClass("otuBentoBox",
 #' @rdname otuBentoBox-class
 setMethod(f = "initialize",
           signature = "otuBentoBox",
-          definition = function(.Object, otutable_filename, metadata_filename)  {
+          definition = function(.Object, f_otutable, f_filename)  {
 
-            if (missing(otutable_filename) || missing(metadata_filename)) stop("input missing!.")
+            if (missing(f_otutable) || missing(f_filename)) stop("input missing.")
 
-            # THE_otu_table will usually have taxonomy column, so it will have one more column than THE_meta_expmt.
-            THE_otu_table  = read.delim(file = otutable_filename, sep = "\t", header = T, check.names = F, row.names = 1, quote = "#")
-            THE_meta_expmt = read.delim(file = metadata_filename, sep = "\t", header = T, check.names = F)
-            # dim(THE_otu_table); dim(THE_meta_expmt)
+            # THE_otutable will usually have taxonomy column, so it will have one more column than THE_meta_expmt.
+            otutable = read.delim(file = f_otutable, sep = "\t", header = T, check.names = F, row.names = 1, quote = "#")
+            metadata = read.delim(file = f_filename, sep = "\t", header = T, check.names = F)
+            # dim(otutable); dim(metadata)
 
             # Taxonomy
-            THE_taxonomy = data.frame(taxonomy = THE_otu_table$taxonomy, row.names = rownames(THE_otu_table));
-            THE_taxonomy$taxonomy = (gsub("; ", ";", THE_taxonomy$taxonomy))
-            THE_taxonomy$taxonomy = (gsub("\\.", "", THE_taxonomy$taxonomy))
+            taxonomy = data.frame(taxonomy = otutable$taxonomy, row.names = rownames(otutable));
+            taxonomy$taxonomy = (gsub("; ", ";", taxonomy$taxonomy))
+            taxonomy$taxonomy = (gsub("\\.", "", taxonomy$taxonomy))
 
             # Remove taxonomy from The OTU Table.
-            THE_otu_table$taxonomy <- NULL
+            THE_otutable$taxonomy <- NULL
 
             # Taxonomy into 7 ranks
             # install.packages(c("tidyr", "devtools"))
             library(tidyr)
-            THE_taxonomy = separate(THE_taxonomy, taxonomy , into = c("k", "p", "c", "o", "f", "g", "s"), sep = ";", extra = "drop")
+            taxonomy = separate(taxonomy, taxonomy , into = c("k", "p", "c", "o", "f", "g", "s"), sep = ";", extra = "drop")
 
-            .Object@otu_table = THE_otu_table
-            .Object@meta_data = THE_meta_expmt
-            .Object@taxonomy = THE_taxonomy
+            .Object@otutable = otutable
+            .Object@metadata = metadata
+            .Object@taxonomy = taxonomy
 
             validObject(.Object)
             return(.Object)
