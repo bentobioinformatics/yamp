@@ -117,15 +117,30 @@ removeTaxaFromBentoBox <- function (bentoBox, classificationLevel, nameToRemove)
 #' @examples
 #' aNewBentoBox = retainTaxaFromBentoBox(aBentoBox, "k", "k__Bacteria")
 retainTaxaFromBentoBox <- function (bentoBox, classificationLevel, nameToRemove) {
-  OTUsToExclude = rownames(bentoBox@taxonomy[ bentoBox@taxonomy[[classificationLevel]] == nameToRemove, ])
-  bentoBox@otutable = bentoBox@otutable[rownames(bentoBox@otutable) %in% OTUsToExclude, ]
-  bentoBox@taxonomy = bentoBox@taxonomy[rownames(bentoBox@taxonomy) %in% OTUsToExclude, ]
+  OTUsToExclude = rownames(bentoBox@taxonomy[ bentoBox@taxonomy[[classificationLevel]] != nameToRemove, ])
+  bentoBox@otutable = bentoBox@otutable[!rownames(bentoBox@otutable) %in% OTUsToExclude, ]
+  bentoBox@taxonomy = bentoBox@taxonomy[!rownames(bentoBox@taxonomy) %in% OTUsToExclude, ]
   return(bentoBox)
 }
 
+# Test
 # otuBentoBox_16S_2 = removeTaxaFromBentoBox(otuBentoBox_16S, c, "c__Chloroplast")
 
 
-
+#' Remove samples from an OTU Bento Box
+#'
+#' Remove whole samples from an OTU Bento Box
+#' @name otuBentoBox
+#' @rdname otuBentoBox
+#' @param bentoBox Your Bento Box
+#' @param samples Samples to remove from Your Bento Box
+#' @export
+#' @examples
+#' aNewBentoBox = removeSamplesFromBentoBox(aBentoBox, c("Sample1", "Sample2"))
+removeSamplesFromBentoBox <- function (bentoBox, samplesToRemove) {
+  bentoBox@otutable = bentoBox@otutable[, !colnames(bentoBox@otutable) %in% samplesToRemove]
+  bentoBox@metadata = bentoBox@metadata[!rownames(bentoBox@metadata) %in% samplesToRemove, ]
+  return(bentoBox)
+}
 
 
