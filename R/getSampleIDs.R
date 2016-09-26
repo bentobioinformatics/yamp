@@ -7,8 +7,8 @@
 #' @export
 #' @examples
 #' SampleIDs = getSampldIDs("otu_table.txt")
-getSampldIDs <- function (otutable_filename) {
-  header <- scan(dataFile_otu_table, skip = 1, nlines = 1, what = character(), sep = "\t")
+getSampldIDs <- function (otu_table) {
+  header <- scan(otu_table, skip = 1, nlines = 1, what = character(), sep = "\t")
   header = header[2:(length(header)-1)]
   header
 }
