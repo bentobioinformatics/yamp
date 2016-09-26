@@ -37,7 +37,7 @@ setMethod(f = "initialize",
             # Taxonomy into 7 ranks
             # install.packages(c("tidyr", "devtools"))
             library(tidyr)
-            taxonomy = separate(taxonomy, taxonomy , into = c("k", "p", "c", "o", "f", "g", "s"), sep = ";", extra = "drop")
+            taxonomy = separate(taxonomy, taxonomy , into = c("k", "p", "c", "o", "f", "g", "s"), sep = ";", extra = "drop", fill = "right")
 
             .Object@otutable = otutable
             .Object@metadata = metadata
