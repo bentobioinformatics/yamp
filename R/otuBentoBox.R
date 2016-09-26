@@ -1,22 +1,22 @@
-#' Class otubasket
+#' Class otuBentoBox
 #'
-#' Class \code{otubasket} defines a gas sensor device.
+#' Class \code{otuBentoBox} defines a gas sensor device.
 #'
-#' @name otubasket-class
-#' @rdname otubasket-class
-#' @exportClass otubasket
-setClass("otubasket",
+#' @name otuBentoBox-class
+#' @rdname otuBentoBox-class
+#' @exportClass otuBentoBox
+setClass("otuBentoBox",
          slots = c(otutable = "data.frame",
                    metadata = "data.frame",
                    taxonomy = "data.frame")
 )
 
-#' Constructor method of otubasket Class.
+#' Constructor method of otuBentoBox Class.
 #'
-#' @name otubasket
-#' @rdname otubasket-class
+#' @name otuBentoBox
+#' @rdname otuBentoBox-class
 setMethod(f = "initialize",
-          signature = "otubasket",
+          signature = "otuBentoBox",
           definition = function(.Object, otutable_filename, metadata_filename)  {
 
             if (missing(otutable_filename) || missing(metadata_filename)) stop("input missing!.")
@@ -51,12 +51,12 @@ setMethod(f = "initialize",
 
 #' Wrapper function Sensor.
 #'
-#' @name otubasket
-#' @rdname otubasket-class
+#' @name otuBentoBox
+#' @rdname otuBentoBox-class
 #' @export
-otubasket <- function (otutable_filename, metadata_filename) {
+otuBentoBox <- function (otutable_filename, metadata_filename) {
   print("hi")
-  new("otubasket", otutable_filename, metadata_filename)
+  new("otuBentoBox", otutable_filename, metadata_filename)
 }
 
 
