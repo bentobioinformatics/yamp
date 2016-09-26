@@ -4,7 +4,7 @@
 \alias{getSampleNames}
 \title{getSampleNames}
 \usage{
-getSampleNames(.otu_table)
+getSampleNames(.f_otu_table)
 }
 \arguments{
 \item{otu_table}{OTU Table file}
