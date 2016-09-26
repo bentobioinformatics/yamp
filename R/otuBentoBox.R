@@ -22,8 +22,8 @@ setMethod(f = "initialize",
             if (missing(otutable_filename) || missing(metadata_filename)) stop("input missing!.")
 
             # THE_otu_table will usually have taxonomy column, so it will have one more column than THE_meta_expmt.
-            THE_otu_table  = read.delim(file = otutable_filename,  sep = "\t", header = T, check.names = F, row.names = 1, quote = "#")
-            THE_meta_expmt = read.csv  (file = metadata_filename, sep = ",",  header = T, check.names = F)
+            THE_otu_table  = read.delim(file = otutable_filename, sep = "\t", header = T, check.names = F, row.names = 1, quote = "#")
+            THE_meta_expmt = read.delim(file = metadata_filename, sep = "\t", header = T, check.names = F)
             # dim(THE_otu_table); dim(THE_meta_expmt)
 
             # Taxonomy
@@ -55,7 +55,6 @@ setMethod(f = "initialize",
 #' @rdname otuBentoBox-class
 #' @export
 otuBentoBox <- function (otutable_filename, metadata_filename) {
-  print("hi")
   new("otuBentoBox", otutable_filename, metadata_filename)
 }
 
