@@ -6,8 +6,7 @@
 \alias{otuBentoBox-class}
 \title{Class otuBentoBox}
 \usage{
-\S4method{initialize}{otuBentoBox}(.Object, otutable_filename,
-  metadata_filename)
+\S4method{initialize}{otuBentoBox}(.Object, f_otutable, f_filename)
 
 otuBentoBox(otutable_filename, metadata_filename)
 }
@@ -16,6 +15,6 @@ Class \code{otuBentoBox} defines a gas sensor device.
 
 Constructor method of otuBentoBox Class.
 
-Wrapper function Sensor.
+Wrapper function otuBentoBox.
 }
 
