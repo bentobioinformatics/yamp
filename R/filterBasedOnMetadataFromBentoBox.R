@@ -4,7 +4,7 @@
 #' @param bentoBox Your Bento Box
 #' @param column Column in metadata
 #' @param termsToRetain Terms to retain
-#' @param type Remove or retain samples. Optinos: "remove", "remain" (default = "remove")
+#' @param type Remove or retain samples. Options: "remove", "remain" (default = "remove")
 #' @export
 #' @examples
 #' aNewBentoBox = filterBasedOnMetadataFromBentoBox(aBentoBox, "Habitat", c("Water", "Water_M", "Biofilm", "Sediment_T"), type = "remove")
