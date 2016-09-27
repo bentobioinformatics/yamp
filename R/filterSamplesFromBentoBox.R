@@ -1,14 +1,12 @@
 #' Filter samples from an OTU Bento Box
 #'
-#' Filter samples from an OTU Bento Box
-#' @name otuBentoBox
-#' @rdname otuBentoBox
+#' This function filter samples from an OTU Bento Box
 #' @param bentoBox Your Bento Box
-#' @param samples Samples to remove from Your Bento Box
-#' @param remove Whether of not you want to remove or retain (default = TRUE)
+#' @param samples a vector of samples to remove from Your Bento Box
+#' @param type Remove or retain samples. Optinos: "remove", "remain" (default = "remove")
 #' @export
 #' @examples
-#' aNewBentoBox = filterSamplesFromBentoBox(aBentoBox, c("Sample1", "Sample2"))
+#' aNewBentoBox = filterSamplesFromBentoBox(aBentoBox, c("Sample1", "Sample2"), type = "remove")
 
 filterSamplesFromBentoBox <- function (bentoBox, samplesToRemove, type = "remove") {
 
@@ -22,7 +20,7 @@ filterSamplesFromBentoBox <- function (bentoBox, samplesToRemove, type = "remove
     .bentoBox@otutable = bentoBox@otutable[, colnames(bentoBox@otutable) %in% samplesToRemove]
     .bentoBox@metadata = bentoBox@metadata[colnames(bentoBox@otutable) %in% samplesToRemove, ]
   } else {
-    stop("type needs to be either remove or retain")
+    stop("Type needs to be either remove or retain")
   }
 
   # Remove zero-sum OTUs

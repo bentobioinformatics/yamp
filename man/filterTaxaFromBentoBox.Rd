@@ -2,10 +2,10 @@
 % Please edit documentation in R/filterTaxaFromBentoBox.R
 \name{filterTaxaFromBentoBox}
 \alias{filterTaxaFromBentoBox}
-\title{Remove taxa from an OTU Bento Box}
+\title{Filter taxa from an OTU Bento Box}
 \usage{
 filterTaxaFromBentoBox(bentoBox, classificationLevel, nameToRemove,
-  remove = TRUE)
+  type = "remove")
 }
 \arguments{
 \item{bentoBox}{Your Bento Box}
@@ -14,12 +14,12 @@ filterTaxaFromBentoBox(bentoBox, classificationLevel, nameToRemove,
 
 \item{nameToRemove}{Names to remove}
 
-\item{remove}{Whether of not you want to remove or retain (default = TRUE)}
+\item{type}{Remove or retain samples. Optinos: "remove", "remain" (default = "remove")}
 }
 \description{
-This function removes taxa from an OTU Bento Box
+This function filters taxa from an OTU Bento Box
 }
 \examples{
-aNewBentoBox = filterTaxaFromBentoBox(aBentoBox, "k", "k__Bacteria", remove = TRUE)
+aNewBentoBox = filterTaxaFromBentoBox(aBentoBox, "k", "k__Bacteria", type = "remove")
 }
 

@@ -1,27 +1,29 @@
-#' Remove taxa from an OTU Bento Box
+#' Filter taxa from an OTU Bento Box
 #'
-#' This function removes taxa from an OTU Bento Box
+#' This function filters taxa from an OTU Bento Box
 #' @param bentoBox Your Bento Box
 #' @param classificationLevel Your classificationLevel
 #' @param nameToRemove Names to remove
-#' @param remove Whether of not you want to remove or retain (default = TRUE)
+#' @param type Remove or retain samples. Optinos: "remove", "remain" (default = "remove")
 #' @export
 #' @examples
-#' aNewBentoBox = filterTaxaFromBentoBox(aBentoBox, "k", "k__Bacteria", remove = TRUE)
+#' aNewBentoBox = filterTaxaFromBentoBox(aBentoBox, "k", "k__Bacteria", type = "remove")
 
-filterTaxaFromBentoBox <- function (bentoBox, classificationLevel, nameToRemove, remove = TRUE) {
+filterTaxaFromBentoBox <- function (bentoBox, classificationLevel, nameToRemove, type = "remove") {
 
   .bentoBox = bentoBox
 
   # Filter
   OTUsToExclude = rownames(bentoBox@taxonomy[bentoBox@taxonomy[[classificationLevel]] == nameToRemove, ])
 
-  if (remove == TRUE) {
+  if (type == "remove") {
     .bentoBox@otutable = bentoBox@otutable[!rownames(bentoBox@otutable) %in% OTUsToExclude, ]
     .bentoBox@taxonomy = bentoBox@taxonomy[!rownames(bentoBox@taxonomy) %in% OTUsToExclude, ]
-  } else {
+  } else if (type == "retain") {
     .bentoBox@otutable = bentoBox@otutable[rownames(bentoBox@otutable) %in% OTUsToExclude, ]
     .bentoBox@taxonomy = bentoBox@taxonomy[rownames(bentoBox@taxonomy) %in% OTUsToExclude, ]
+  } else {
+    stop("Type needs to be either remove or retain")
   }
 
   # Clean

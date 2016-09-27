@@ -1,14 +1,14 @@
 #' Filter entries based on user selected metadata
 #'
-#' Filter entries based on user selected metadata from an OTU Bento Box
-#' @name otuBentoBox
-#' @rdname otuBentoBox
+#' This function filters entries based on user selected metadata columns from an OTU Bento Box
 #' @param bentoBox Your Bento Box
 #' @param column Column in metadata
 #' @param termsToRetain Terms to retain
+#' @param type Remove or retain samples. Optinos: "remove", "remain" (default = "remove")
 #' @export
 #' @examples
-#' aNewBentoBox = filterBasedOnMetadataFromBentoBox(otuBentoBox_16S, "Habitat", c("Water_GFA", "Water_M", "Biofilm", "Sediment_T"))
+#' aNewBentoBox = filterBasedOnMetadataFromBentoBox(aBentoBox, "Habitat", c("Water", "Water_M", "Biofilm", "Sediment_T"), type = "remove")
+
 filterBasedOnMetadataFromBentoBox <- function (bentoBox, column, termsToRetain, type = "remove") {
 
   .bentoBox = bentoBox
