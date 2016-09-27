@@ -156,19 +156,19 @@ retainTaxaFromBentoBox <- function (bentoBox, classificationLevel, nameToRemove)
 #' @examples
 #' aNewBentoBox = removeSamplesFromBentoBox(aBentoBox, c("Sample1", "Sample2"))
 removeSamplesFromBentoBox <- function (bentoBox, samplesToRemove) {
-
-  bentoBox@otutable = bentoBox@otutable[, !colnames(bentoBox@otutable) %in% samplesToRemove]
-  bentoBox@metadata = bentoBox@metadata[!colnames(bentoBox@otutable) %in% samplesToRemove, ]
+  .bentoBox = bentoBox
+  .bentoBox@otutable = bentoBox@otutable[, !colnames(bentoBox@otutable) %in% samplesToRemove]
+  .bentoBox@metadata = bentoBox@metadata[!colnames(bentoBox@otutable) %in% samplesToRemove, ]
 
   # bentoBox@otutable = droplevels(bentoBox@otutable)
   # bentoBox@metadata = droplevels(bentoBox@metadata)
-  cat(dim(bentoBox@otutable))
+  cat(dim(.bentoBox@otutable))
   cat("\n")
-  cat(dim(bentoBox@metadata))
+  cat(dim(.bentoBox@metadata))
   cat("\n")
-  cat(dim(bentoBox@taxonomy))
+  cat(dim(.bentoBox@taxonomy))
   cat("\n")
-  return(bentoBox)
+  return(.bentoBox)
 }
 
 # Test
