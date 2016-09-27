@@ -171,11 +171,17 @@ retainBasedOnMetadataFromBentoBox <- function (bentoBox, column, termsToRetain) 
   # cat(dim(bentoBox@taxonomy))
   # cat("\n")
   bentoBox@otutable = bentoBox@otutable[, bentoBox@metadata[[column]] %in% termsToRetain]
+  print("1")
   bentoBox@metadata = bentoBox@metadata[bentoBox@metadata[[column]] %in% termsToRetain, ]
+  print("2")
   bentoBox@otutable = bentoBox@otutable[which(!apply(bentoBox@otutable, 1, FUN = function(x){ sum(x) == 0 })), ]
+  print("3")
   bentoBox@taxonomy = bentoBox@taxonomy[which(!apply(bentoBox@otutable, 1, FUN = function(x){ sum(x) == 0 })), ]
+  print("4")
   bentoBox@otutable = droplevels(bentoBox@otutable)
+  print("5")
   bentoBox@metadata = droplevels(bentoBox@metadata)
+  print("6")
   bentoBox@taxonomy = droplevels(bentoBox@taxonomy)
   # cat(dim(bentoBox@otutable))
   # cat("\n")
@@ -186,9 +192,9 @@ retainBasedOnMetadataFromBentoBox <- function (bentoBox, column, termsToRetain) 
   return(bentoBox)
 }
 
-# dataFile_otutable = c("~/Library/Mobile\ Documents/com~apple~CloudDocs/Project/ThamesSampling/04_Bioinformatics/ThamesWBS/16S/otu_table.txt")
-# dataFile_metadata = c("~/Library/Mobile\ Documents/com~apple~CloudDocs/Project/ThamesSampling/05_Analysis/ThamesWBS/metadata_combined.txt")
-# bentoBox = otuBentoBox(dataFile_otutable, dataFile_metadata)
-# bentoBox_n = retainBasedOnMetadataFromBentoBox(bentoBox, "Habitat", c("Water_GFA", "Water_M", "Biofilm", "Sediment_T"))
+dataFile_otutable = c("~/Library/Mobile\ Documents/com~apple~CloudDocs/Project/ThamesSampling/04_Bioinformatics/ThamesWBS/16S/otu_table.txt")
+dataFile_metadata = c("~/Library/Mobile\ Documents/com~apple~CloudDocs/Project/ThamesSampling/05_Analysis/ThamesWBS/metadata_combined.txt")
+bentoBox = otuBentoBox(dataFile_otutable, dataFile_metadata)
+bentoBox_n = retainBasedOnMetadataFromBentoBox(bentoBox, "Habitat", c("Water_GFA", "Water_M", "Biofilm", "Sediment_T"))
 
 
