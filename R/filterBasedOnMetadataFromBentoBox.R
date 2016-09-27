@@ -16,11 +16,11 @@ filterBasedOnMetadataFromBentoBox <- function (bentoBox, column, termsToRetain, 
   # Filter
   if (type == "remove") {
     print("hi")
-    .bentoBox@otutable = bentoBox@otutable[, bentoBox@metadata[[column]] %in% termsToRetain]
-    .bentoBox@metadata = bentoBox@metadata[bentoBox@metadata[[column]] %in% termsToRetain, ]
-  } else if (type == "retain") {
     .bentoBox@otutable = bentoBox@otutable[, !bentoBox@metadata[[column]] %in% termsToRetain]
     .bentoBox@metadata = bentoBox@metadata[!bentoBox@metadata[[column]] %in% termsToRetain, ]
+  } else if (type == "retain") {
+    .bentoBox@otutable = bentoBox@otutable[, bentoBox@metadata[[column]] %in% termsToRetain]
+    .bentoBox@metadata = bentoBox@metadata[bentoBox@metadata[[column]] %in% termsToRetain, ]
   } else {
     stop("type needs to be either remove or retain")
   }
