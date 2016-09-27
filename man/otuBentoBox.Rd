@@ -4,6 +4,7 @@
 \alias{otuBentoBox}
 \alias{removeSamplesFromBentoBox}
 \alias{removeTaxaFromBentoBox}
+\alias{retainBasedOnMetadataFromBentoBox}
 \alias{retainTaxaFromBentoBox}
 \title{Remove taxa from an OTU Bento Box}
 \usage{
@@ -12,6 +13,8 @@ removeTaxaFromBentoBox(bentoBox, classificationLevel, nameToRemove)
 retainTaxaFromBentoBox(bentoBox, classificationLevel, nameToRemove)
 
 removeSamplesFromBentoBox(bentoBox, samplesToRemove)
+
+retainBasedOnMetadataFromBentoBox(bentoBox, column, termsToRetain)
 }
 \arguments{
 \item{bentoBox}{Your Bento Box}
@@ -19,6 +22,10 @@ removeSamplesFromBentoBox(bentoBox, samplesToRemove)
 \item{classificationLevel}{Your classificationLevel}
 
 \item{nameToRemove}{Names to remove}
+
+\item{column}{Column in metadata}
+
+\item{termsToRetain}{Terms to retain}
 
 \item{bentoBox}{Your Bento Box}
 
@@ -29,6 +36,8 @@ removeSamplesFromBentoBox(bentoBox, samplesToRemove)
 \item{bentoBox}{Your Bento Box}
 
 \item{samples}{Samples to remove from Your Bento Box}
+
+\item{bentoBox}{Your Bento Box}
 }
 \description{
 Remove taxa from an OTU Bento Box
@@ -36,10 +45,13 @@ Remove taxa from an OTU Bento Box
 Retain taxa from an OTU Bento Box
 
 Remove whole samples from an OTU Bento Box
+
+Remove entries based on user selected metadata from an OTU Bento Box
 }
 \examples{
 aNewBentoBox = removeTaxaFromBentoBox(aBentoBox, "k", "k__Bacteria")
 aNewBentoBox = retainTaxaFromBentoBox(aBentoBox, "k", "k__Bacteria")
 aNewBentoBox = removeSamplesFromBentoBox(aBentoBox, c("Sample1", "Sample2"))
+aNewBentoBox = retainBasedOnMetadataFromBentoBox(otuBentoBox_16S, "Habitat", c("Water_GFA", "Water_M", "Biofilm", "Sediment_T"))
 }
 

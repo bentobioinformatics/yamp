@@ -99,9 +99,10 @@ otuBentoBox <- function (otutable_filename, metadata_filename) {
 #' aNewBentoBox = removeTaxaFromBentoBox(aBentoBox, "k", "k__Bacteria")
 removeTaxaFromBentoBox <- function (bentoBox, classificationLevel, nameToRemove) {
   OTUsToExclude = rownames(bentoBox@taxonomy[ bentoBox@taxonomy[[classificationLevel]] == nameToRemove, ])
-  print(OTUsToExclude)
   bentoBox@otutable = bentoBox@otutable[!rownames(bentoBox@otutable) %in% OTUsToExclude, ]
   bentoBox@taxonomy = bentoBox@taxonomy[!rownames(bentoBox@taxonomy) %in% OTUsToExclude, ]
+  bentoBox@otutable = droplevels(bentoBox@otutable)
+  bentoBox@taxonomy = droplevels(bentoBox@taxonomy)
   return(bentoBox)
 }
 
@@ -120,11 +121,16 @@ retainTaxaFromBentoBox <- function (bentoBox, classificationLevel, nameToRemove)
   OTUsToExclude = rownames(bentoBox@taxonomy[ bentoBox@taxonomy[[classificationLevel]] != nameToRemove, ])
   bentoBox@otutable = bentoBox@otutable[!rownames(bentoBox@otutable) %in% OTUsToExclude, ]
   bentoBox@taxonomy = bentoBox@taxonomy[!rownames(bentoBox@taxonomy) %in% OTUsToExclude, ]
+  bentoBox@otutable = droplevels(bentoBox@otutable)
+  bentoBox@taxonomy = droplevels(bentoBox@taxonomy)
   return(bentoBox)
 }
 
 # Test
-# otuBentoBox_16S_2 = removeTaxaFromBentoBox(otuBentoBox_16S, c, "c__Chloroplast")
+# dataFile_otutable = c("~/Library/Mobile\ Documents/com~apple~CloudDocs/Project/ThamesSampling/04_Bioinformatics/ThamesWBS/16S/otu_table.txt")
+# dataFile_metadata = c("~/Library/Mobile\ Documents/com~apple~CloudDocs/Project/ThamesSampling/05_Analysis/ThamesWBS/metadata_combined.txt")
+# otuBentoBox_16S = otuBentoBox(dataFile_otutable, dataFile_metadata)
+# otuBentoBox_16S = removeTaxaFromBentoBox(otuBentoBox_16S, "c", "c__Chloroplast")
 
 
 #' Remove samples from an OTU Bento Box
@@ -140,7 +146,49 @@ retainTaxaFromBentoBox <- function (bentoBox, classificationLevel, nameToRemove)
 removeSamplesFromBentoBox <- function (bentoBox, samplesToRemove) {
   bentoBox@otutable = bentoBox@otutable[, !colnames(bentoBox@otutable) %in% samplesToRemove]
   bentoBox@metadata = bentoBox@metadata[!rownames(bentoBox@metadata) %in% samplesToRemove, ]
+  bentoBox@otutable = droplevels(bentoBox@otutable)
+  bentoBox@metadata = droplevels(bentoBox@metadata)
   return(bentoBox)
 }
+
+
+#' Remove entries based on user selected metadata
+#'
+#' Remove entries based on user selected metadata from an OTU Bento Box
+#' @name otuBentoBox
+#' @rdname otuBentoBox
+#' @param bentoBox Your Bento Box
+#' @param column Column in metadata
+#' @param termsToRetain Terms to retain
+#' @export
+#' @examples
+#' aNewBentoBox = retainBasedOnMetadataFromBentoBox(otuBentoBox_16S, "Habitat", c("Water_GFA", "Water_M", "Biofilm", "Sediment_T"))
+retainBasedOnMetadataFromBentoBox <- function (bentoBox, column, termsToRetain) {
+  # cat(dim(bentoBox@otutable))
+  # cat("\n")
+  # cat(dim(bentoBox@metadata))
+  # cat("\n")
+  # cat(dim(bentoBox@taxonomy))
+  # cat("\n")
+  bentoBox@otutable = bentoBox@otutable[, bentoBox@metadata[[column]] %in% termsToRetain]
+  bentoBox@metadata = bentoBox@metadata[bentoBox@metadata[[column]] %in% termsToRetain, ]
+  bentoBox@otutable = bentoBox@otutable[which(!apply(bentoBox@otutable, 1, FUN = function(x){ sum(x) == 0 })), ]
+  bentoBox@taxonomy = bentoBox@taxonomy[which(!apply(bentoBox@otutable, 1, FUN = function(x){ sum(x) == 0 })), ]
+  bentoBox@otutable = droplevels(bentoBox@otutable)
+  bentoBox@metadata = droplevels(bentoBox@metadata)
+  bentoBox@taxonomy = droplevels(bentoBox@taxonomy)
+  # cat(dim(bentoBox@otutable))
+  # cat("\n")
+  # cat(dim(bentoBox@metadata))
+  # cat("\n")
+  # cat(dim(bentoBox@taxonomy))
+  # cat("\n")
+  return(bentoBox)
+}
+
+# dataFile_otutable = c("~/Library/Mobile\ Documents/com~apple~CloudDocs/Project/ThamesSampling/04_Bioinformatics/ThamesWBS/16S/otu_table.txt")
+# dataFile_metadata = c("~/Library/Mobile\ Documents/com~apple~CloudDocs/Project/ThamesSampling/05_Analysis/ThamesWBS/metadata_combined.txt")
+# bentoBox = otuBentoBox(dataFile_otutable, dataFile_metadata)
+# bentoBox_n = retainBasedOnMetadataFromBentoBox(bentoBox, "Habitat", c("Water_GFA", "Water_M", "Biofilm", "Sediment_T"))
 
 
