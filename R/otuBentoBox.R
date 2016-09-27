@@ -158,8 +158,8 @@ retainTaxaFromBentoBox <- function (bentoBox, classificationLevel, nameToRemove)
 removeSamplesFromBentoBox <- function (bentoBox, samplesToRemove) {
   bentoBox@otutable = bentoBox@otutable[, !colnames(bentoBox@otutable) %in% samplesToRemove]
   bentoBox@metadata = bentoBox@metadata[!colnames(bentoBox@otutable) %in% samplesToRemove, ]
-  bentoBox@otutable = droplevels(bentoBox@otutable)
-  bentoBox@metadata = droplevels(bentoBox@metadata)
+  # bentoBox@otutable = droplevels(bentoBox@otutable)
+  # bentoBox@metadata = droplevels(bentoBox@metadata)
   cat(dim(bentoBox@otutable))
   cat("\n")
   cat(dim(bentoBox@metadata))
@@ -178,6 +178,8 @@ bentoBox = otuBentoBox(dataFile_otutable, dataFile_metadata)
 samplesToRemove = c("EB01", "EB02", "EB03", "EB04", "EB05")
 o = bentoBox@otutable[, !colnames(bentoBox@otutable) %in% samplesToRemove]
 m = bentoBox@metadata[!colnames(bentoBox@otutable) %in% samplesToRemove, ]
+dim(o)
+dim(m)
 }
 
 
@@ -199,7 +201,7 @@ retainBasedOnMetadataFromBentoBox <- function (bentoBox, column, termsToRetain) 
   # cat("\n")
   # cat(dim(bentoBox@taxonomy))
   # cat("\n")
-  bentoBox@otutable = bentoBox@otutable[, bentoBox@metadata[[column]] %in% termsToRetain]
+  bentoBox@otutable = bentoBox@otutable[bentoBox@metadata[[column]] %in% termsToRetain, ]
   bentoBox@metadata = bentoBox@metadata[bentoBox@metadata[[column]] %in% termsToRetain, ]
   bentoBox@otutable = bentoBox@otutable[which(!apply(bentoBox@otutable, 1, FUN = function(x){ sum(x) == 0 })), ]
   bentoBox@taxonomy = bentoBox@taxonomy[which(!apply(bentoBox@otutable, 1, FUN = function(x){ sum(x) == 0 })), ]
