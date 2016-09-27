@@ -157,7 +157,7 @@ retainTaxaFromBentoBox <- function (bentoBox, classificationLevel, nameToRemove)
 #' aNewBentoBox = removeSamplesFromBentoBox(aBentoBox, c("Sample1", "Sample2"))
 removeSamplesFromBentoBox <- function (bentoBox, samplesToRemove) {
   bentoBox@otutable = bentoBox@otutable[, !colnames(bentoBox@otutable) %in% samplesToRemove]
-  bentoBox@metadata = bentoBox@metadata[!rownames(bentoBox@metadata) %in% samplesToRemove, ]
+  bentoBox@metadata = bentoBox@metadata[!colnames(bentoBox@otutable) %in% samplesToRemove, ]
   bentoBox@otutable = droplevels(bentoBox@otutable)
   bentoBox@metadata = droplevels(bentoBox@metadata)
   cat(dim(bentoBox@otutable))
@@ -168,6 +168,19 @@ removeSamplesFromBentoBox <- function (bentoBox, samplesToRemove) {
   cat("\n")
   return(bentoBox)
 }
+
+# Test
+if (FALSE) {
+# Unit test to replicate: otuBentoBox_m = removeSamplesFromBentoBox(otuBentoBox, c("EB01", "EB02", "EB03", "EB04", "EB05"))
+dataFile_otutable = c("~/Library/Mobile\ Documents/com~apple~CloudDocs/Project/ThamesSampling/04_Bioinformatics/ThamesWBS/16S/otu_table.txt")
+dataFile_metadata = c("~/Library/Mobile\ Documents/com~apple~CloudDocs/Project/ThamesSampling/05_Analysis/ThamesWBS/metadata_combined.txt")
+bentoBox = otuBentoBox(dataFile_otutable, dataFile_metadata)
+samplesToRemove = c("EB01", "EB02", "EB03", "EB04", "EB05")
+o = bentoBox@otutable[, !colnames(bentoBox@otutable) %in% samplesToRemove]
+m = bentoBox@metadata[!colnames(bentoBox@otutable) %in% samplesToRemove, ]
+}
+
+
 
 
 #' Remove entries based on user selected metadata
