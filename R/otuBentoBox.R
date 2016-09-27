@@ -103,7 +103,12 @@ removeTaxaFromBentoBox <- function (bentoBox, classificationLevel, nameToRemove)
   bentoBox@taxonomy = bentoBox@taxonomy[!rownames(bentoBox@taxonomy) %in% OTUsToExclude, ]
   bentoBox@otutable = droplevels(bentoBox@otutable)
   bentoBox@taxonomy = droplevels(bentoBox@taxonomy)
-  return(bentoBox)
+  cat(dim(bentoBox@otutable))
+  cat("\n")
+  cat(dim(bentoBox@metadata))
+  cat("\n")
+  cat(dim(bentoBox@taxonomy))
+  cat("\n")  return(bentoBox)
 }
 
 
@@ -123,7 +128,12 @@ retainTaxaFromBentoBox <- function (bentoBox, classificationLevel, nameToRemove)
   bentoBox@taxonomy = bentoBox@taxonomy[!rownames(bentoBox@taxonomy) %in% OTUsToExclude, ]
   bentoBox@otutable = droplevels(bentoBox@otutable)
   bentoBox@taxonomy = droplevels(bentoBox@taxonomy)
-  return(bentoBox)
+  cat(dim(bentoBox@otutable))
+  cat("\n")
+  cat(dim(bentoBox@metadata))
+  cat("\n")
+  cat(dim(bentoBox@taxonomy))
+  cat("\n")  return(bentoBox)
 }
 
 # Test
@@ -148,6 +158,12 @@ removeSamplesFromBentoBox <- function (bentoBox, samplesToRemove) {
   bentoBox@metadata = bentoBox@metadata[!rownames(bentoBox@metadata) %in% samplesToRemove, ]
   bentoBox@otutable = droplevels(bentoBox@otutable)
   bentoBox@metadata = droplevels(bentoBox@metadata)
+  cat(dim(bentoBox@otutable))
+  cat("\n")
+  cat(dim(bentoBox@metadata))
+  cat("\n")
+  cat(dim(bentoBox@taxonomy))
+  cat("\n")
   return(bentoBox)
 }
 
