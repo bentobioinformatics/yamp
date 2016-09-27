@@ -108,7 +108,8 @@ removeTaxaFromBentoBox <- function (bentoBox, classificationLevel, nameToRemove)
   cat(dim(bentoBox@metadata))
   cat("\n")
   cat(dim(bentoBox@taxonomy))
-  cat("\n")  return(bentoBox)
+  cat("\n")
+  return(bentoBox)
 }
 
 
@@ -133,7 +134,8 @@ retainTaxaFromBentoBox <- function (bentoBox, classificationLevel, nameToRemove)
   cat(dim(bentoBox@metadata))
   cat("\n")
   cat(dim(bentoBox@taxonomy))
-  cat("\n")  return(bentoBox)
+  cat("\n")
+  return(bentoBox)
 }
 
 # Test
@@ -199,12 +201,12 @@ retainBasedOnMetadataFromBentoBox <- function (bentoBox, column, termsToRetain) 
   bentoBox@metadata = droplevels(bentoBox@metadata)
   print("6")
   bentoBox@taxonomy = droplevels(bentoBox@taxonomy)
-  # cat(dim(bentoBox@otutable))
-  # cat("\n")
-  # cat(dim(bentoBox@metadata))
-  # cat("\n")
-  # cat(dim(bentoBox@taxonomy))
-  # cat("\n")
+  cat(dim(bentoBox@otutable))
+  cat("\n")
+  cat(dim(bentoBox@metadata))
+  cat("\n")
+  cat(dim(bentoBox@taxonomy))
+  cat("\n")
   return(bentoBox)
 }
 
