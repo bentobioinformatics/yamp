@@ -181,8 +181,6 @@ m = bentoBox@metadata[!colnames(bentoBox@otutable) %in% samplesToRemove, ]
 }
 
 
-
-
 #' Remove entries based on user selected metadata
 #'
 #' Remove entries based on user selected metadata from an OTU Bento Box
@@ -202,17 +200,11 @@ retainBasedOnMetadataFromBentoBox <- function (bentoBox, column, termsToRetain) 
   # cat(dim(bentoBox@taxonomy))
   # cat("\n")
   bentoBox@otutable = bentoBox@otutable[, bentoBox@metadata[[column]] %in% termsToRetain]
-  print("1")
   bentoBox@metadata = bentoBox@metadata[bentoBox@metadata[[column]] %in% termsToRetain, ]
-  print("2")
   bentoBox@otutable = bentoBox@otutable[which(!apply(bentoBox@otutable, 1, FUN = function(x){ sum(x) == 0 })), ]
-  print("3")
   bentoBox@taxonomy = bentoBox@taxonomy[which(!apply(bentoBox@otutable, 1, FUN = function(x){ sum(x) == 0 })), ]
-  print("4")
   bentoBox@otutable = droplevels(bentoBox@otutable)
-  print("5")
   bentoBox@metadata = droplevels(bentoBox@metadata)
-  print("6")
   bentoBox@taxonomy = droplevels(bentoBox@taxonomy)
   cat(dim(bentoBox@otutable))
   cat("\n")
