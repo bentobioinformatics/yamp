@@ -6,6 +6,7 @@
 #' @export
 #' @examples
 #' sampleNames = getSampleNames("otu_table.txt")
+
 getSampleNames <- function (file) {
   header = scan(file, skip = 1, nlines = 1, what = character(), sep = "\t")
   header = header[2:(length(header)-1)]
