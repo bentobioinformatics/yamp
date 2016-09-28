@@ -1,13 +1,15 @@
-#' Filter out OTUs with less than x% prevalence
+#' Filter out OTUs with less than x\% prevalence
 #'
-#' Say you have collected 10 replicates. Only 5 out of 10 of the replicates have an OTU. This function filters out such OTUs. The idea is to have a dataset which is a good representative of the site.
+#' Say you have collected 10 replicates.
+#' Only 5 of 10 of the replicates have a particular OTU.
+#' You want to retain such OTUs but remove those with less than 5.
+#' This function will deal with this situation! Choose prevalence = 0.5 to achieve this.
 #' @param bentoBox Your Bento Box
 #' @param column Column in metadata to group replicates
-#' @param prevalence prevalence. So, 0.75 means an OTU which is present in less than 75% of all replicates will be removed.
+#' @param prevalence prevalence. So, 0.5 means an OTU which is present in less than 50\% of all replicates will be removed.
 #' @export
 #' @examples
-#' aNewBentoBox =
-
+#' aNewBentoBox = filterByReplicatePrevalence(bentoBox, column, prevalence = 0.5)
 filterByReplicatePrevalence <- function (bentoBox, column, prevalence = 0.75) {
 
   for (.replicateGroup in levels(bentoBox@metadata[[column]])) {
@@ -55,29 +57,27 @@ filterByReplicatePrevalence <- function (bentoBox, column, prevalence = 0.75) {
   # return(.bentoBox)
 
 }
-
-
-# Test
-if (FALSE) {
-  dataFile_otutable = c("~/Library/Mobile\ Documents/com~apple~CloudDocs/Project/ThamesSampling/04_Bioinformatics/ThamesWBS/16S/otu_table.txt")
-  dataFile_metadata = c("~/Library/Mobile\ Documents/com~apple~CloudDocs/Project/ThamesSampling/05_Analysis/ThamesWBS/metadata_combined.txt")
-  bentoBox = otuBentoBox(dataFile_otutable, dataFile_metadata)
-  bentoBox_ = filterBasedOnMetadataFromBentoBox(bentoBox, "Habitat", c("Water_GFA", "Water_M", "Biofilm", "Sediment_T"), type = "remove")
-
-  dim(bentoBox@otutable)
-  dim(bentoBox@metadata)
-  dim(bentoBox@taxonomy)
-
-  dim(bentoBox_@otutable)
-  dim(bentoBox_@metadata)
-  dim(bentoBox_@taxonomy)
-
-  a = bentoBox@otutable
-  o = bentoBox@otutable[, bentoBox@metadata[["Habitat"]] %in% c("Water_GFA", "Water_M", "Biofilm", "Sediment_T"),]
-  dim(o)
-  m = bentoBox@metadata[bentoBox@metadata[["Habitat"]] %in% c("Water_GFA", "Water_M", "Biofilm", "Sediment_T"), ]
-  dim(m)
-  View(bentoBox@otutable[1:2])
-}
-
-
+#
+#
+# # Test
+# if (FALSE) {
+#   dataFile_otutable = c("~/Library/Mobile\ Documents/com~apple~CloudDocs/Project/ThamesSampling/04_Bioinformatics/ThamesWBS/16S/otu_table.txt")
+#   dataFile_metadata = c("~/Library/Mobile\ Documents/com~apple~CloudDocs/Project/ThamesSampling/05_Analysis/ThamesWBS/metadata_combined.txt")
+#   bentoBox = otuBentoBox(dataFile_otutable, dataFile_metadata)
+#   bentoBox_ = filterBasedOnMetadataFromBentoBox(bentoBox, "Habitat", c("Water_GFA", "Water_M", "Biofilm", "Sediment_T"), type = "remove")
+#
+#   dim(bentoBox@otutable)
+#   dim(bentoBox@metadata)
+#   dim(bentoBox@taxonomy)
+#
+#   dim(bentoBox_@otutable)
+#   dim(bentoBox_@metadata)
+#   dim(bentoBox_@taxonomy)
+#
+#   a = bentoBox@otutable
+#   o = bentoBox@otutable[, bentoBox@metadata[["Habitat"]] %in% c("Water_GFA", "Water_M", "Biofilm", "Sediment_T"),]
+#   dim(o)
+#   m = bentoBox@metadata[bentoBox@metadata[["Habitat"]] %in% c("Water_GFA", "Water_M", "Biofilm", "Sediment_T"), ]
+#   dim(m)
+#   View(bentoBox@otutable[1:2])
+# }
