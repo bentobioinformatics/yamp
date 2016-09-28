@@ -13,7 +13,7 @@
 filterByReplicatePrevalence <- function (bentoBox, column, prevalence = 0.75) {
 
   for (.replicateGroup in levels(bentoBox@metadata[[column]])) {
-    print(.replicateGroup)
+    cat(paste("processing:", .replicateGroup, "\n"))
     otutable_replicateGroup <- bentoBox@otutable[, bentoBox@metadata$replicateGroup == .replicateGroup]
     if (!is.null(dim(otutable_replicateGroup))) {
       prevalence = apply(otutable_replicateGroup != 0, 1, mean)
