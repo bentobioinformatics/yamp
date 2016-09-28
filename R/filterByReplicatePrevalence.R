@@ -25,8 +25,8 @@ filterByReplicatePrevalence <- function (bentoBox, column, prevalence = 0.75) {
   }
 
   .zeroSumOTUs = which(!apply(.bentoBox@otutable, 1, FUN = function(x){ sum(x) == 0 }))
-  .bentoBox@otutable = .bentoBox@otutable[.zeroSumOTUs, ]
-  .bentoBox@taxonomy = .bentoBox@taxonomy[.zeroSumOTUs, ]
+  # .bentoBox@otutable = .bentoBox@otutable[.zeroSumOTUs, ]
+  # .bentoBox@taxonomy = .bentoBox@taxonomy[.zeroSumOTUs, ]
 
   # Drop levels
   .bentoBox@otutable = droplevels(.bentoBox@otutable)
