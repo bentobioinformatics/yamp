@@ -12,49 +12,33 @@
 #' aNewBentoBox = filterByReplicatePrevalence(bentoBox, column, prevalence = 0.5)
 filterByReplicatePrevalence <- function (bentoBox, column, prevalence = 0.75) {
 
-  for (.replicateGroup in levels(bentoBox@metadata[[column]])) {
+  .bentoBox = bentoBox
+
+  for (.replicateGroup in levels(.bentoBox@metadata[[column]])) {
     cat(paste("processing:", .replicateGroup, "\n"))
-    otutable_replicateGroup <- bentoBox@otutable[, bentoBox@metadata$replicateGroup == .replicateGroup]
+    otutable_replicateGroup <- .bentoBox@otutable[, .bentoBox@metadata$replicateGroup == .replicateGroup]
     if (!is.null(dim(otutable_replicateGroup))) {
       prevalence = apply(otutable_replicateGroup != 0, 1, mean)
       otutable_replicateGroup[prevalence < 0.75, ] = 0
-      bentoBox@otutable[, bentoBox@metadata$replicateGroup == .replicateGroup] <- otutable_replicateGroup
+      .bentoBox@otutable[, .bentoBox@metadata$replicateGroup == .replicateGroup] <- otutable_replicateGroup
     }
   }
 
-  return(bentoBox)
-  #
-  #
-  # .bentoBox = bentoBox
-  #
-  # # Filter
-  # if (type == "remove") {
-  #   print("hi")
-  #   .bentoBox@otutable = bentoBox@otutable[, !bentoBox@metadata[[column]] %in% termsToRetain]
-  #   .bentoBox@metadata = bentoBox@metadata[!bentoBox@metadata[[column]] %in% termsToRetain, ]
-  # } else if (type == "retain") {
-  #   .bentoBox@otutable = bentoBox@otutable[, bentoBox@metadata[[column]] %in% termsToRetain]
-  #   .bentoBox@metadata = bentoBox@metadata[bentoBox@metadata[[column]] %in% termsToRetain, ]
-  # } else {
-  #   stop("type needs to be either remove or retain")
-  # }
-  #
-  # # Remove zero-sum OTUs
-  # .zeroSumOTUs = which(!apply(.bentoBox@otutable, 1, FUN = function(x){ sum(x) == 0 }))
-  # .bentoBox@otutable = .bentoBox@otutable[.zeroSumOTUs, ]
-  # .bentoBox@taxonomy = .bentoBox@taxonomy[.zeroSumOTUs, ]
-  #
-  # # Drop levels
-  # .bentoBox@otutable = droplevels(.bentoBox@otutable)
-  # .bentoBox@metadata = droplevels(.bentoBox@metadata)
-  # .bentoBox@taxonomy = droplevels(.bentoBox@taxonomy)
-  #
-  # # Output
-  # cat(paste("[otutable] Number of OTUs   :", dim(.bentoBox@otutable)[1], "\n"))
-  # cat(paste("           Number of samples:", dim(.bentoBox@otutable)[2], "\n"))
-  # cat(paste("[metadata] Number of samples:", dim(.bentoBox@metadata)[1], "\n"))
-  # cat(paste("[taxonomy] Number of OTUs   :",    dim(.bentoBox@taxonomy)[1], "\n"))
-  # return(.bentoBox)
+  .zeroSumOTUs = which(!apply(.bentoBox@otutable, 1, FUN = function(x){ sum(x) == 0 }))
+  .bentoBox@otutable = .bentoBox@otutable[.zeroSumOTUs, ]
+  .bentoBox@taxonomy = .bentoBox@taxonomy[.zeroSumOTUs, ]
+
+  # Drop levels
+  .bentoBox@otutable = droplevels(.bentoBox@otutable)
+  .bentoBox@metadata = droplevels(.bentoBox@metadata)
+  .bentoBox@taxonomy = droplevels(.bentoBox@taxonomy)
+
+  # Output
+  cat(paste("[otutable] Number of OTUs   :", dim(.bentoBox@otutable)[1], "\n"))
+  cat(paste("           Number of samples:", dim(.bentoBox@otutable)[2], "\n"))
+  cat(paste("[metadata] Number of samples:", dim(.bentoBox@metadata)[1], "\n"))
+  cat(paste("[taxonomy] Number of OTUs   :",    dim(.bentoBox@taxonomy)[1], "\n"))
+  return(.bentoBox)
 
 }
 #
