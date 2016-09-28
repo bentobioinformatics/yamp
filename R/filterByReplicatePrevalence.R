@@ -12,13 +12,15 @@ filterByReplicatePrevalence <- function (bentoBox, column, prevalence = 0.75) {
 
   for (.replicateGroup in levels(bentoBox@metadata[[column]])) {
     print(.replicateGroup)
-    # otutable_replicateGroup <- otutable[, metadata$replicateGroup == .replicateGroup]
-    # if (!is.null(dim(otutable_replicateGroup))) {
-    #   prevalence = apply(otutable_replicateGroup != 0, 1, mean)
-    #   otutable_replicateGroup[prevalence < 0.75, ] = 0
-    #   otutable[, metadata$replicateGroup == .replicateGroup] <- otutable_replicateGroup
-    # }
+    otutable_replicateGroup <- bentoBox@otutable[, bentoBox@metadata$replicateGroup == .replicateGroup]
+    if (!is.null(dim(otutable_replicateGroup))) {
+      prevalence = apply(otutable_replicateGroup != 0, 1, mean)
+      otutable_replicateGroup[prevalence < 0.75, ] = 0
+      bentoBox@otutable[, bentoBox@metadata$replicateGroup == .replicateGroup] <- otutable_replicateGroup
+    }
   }
+
+  return(bentoBox)
   #
   #
   # .bentoBox = bentoBox
