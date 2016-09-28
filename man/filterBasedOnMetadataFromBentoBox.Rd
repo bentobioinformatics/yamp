@@ -14,7 +14,7 @@ filterBasedOnMetadataFromBentoBox(bentoBox, column, termsToRetain,
 
 \item{termsToRetain}{Terms to retain}
 
-\item{type}{Remove or retain samples. Optinos: "remove", "remain" (default = "remove")}
+\item{type}{Remove or retain samples. Options: "remove", "remain" (default = "remove")}
 }
 \description{
 This function filters entries based on user selected metadata columns from an OTU Bento Box
