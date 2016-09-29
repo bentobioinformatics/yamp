@@ -18,11 +18,7 @@ poolReplicates <- function (bentoBox, column) {
   library(plyr)
   .bentoBox@metadata = ddply(.bentoBox@metadata, "replicateGroup", function(z) head(z,1))
 
-  rownames(.bentoBox@metadata) = colnames(.bentoBox@otutable)
-
-  # .zeroSumOTUs = which(!apply(.bentoBox@otutable, 1, FUN = function(x){ sum(x) == 0 }))
-  # .bentoBox@otutable = .bentoBox@otutable[.zeroSumOTUs, ]
-  # .bentoBox@taxonomy = .bentoBox@taxonomy[.zeroSumOTUs, ]
+  # rownames(.bentoBox@metadata) = colnames(.bentoBox@otutable)
 
   # Drop levels
   .bentoBox@otutable = droplevels(.bentoBox@otutable)
