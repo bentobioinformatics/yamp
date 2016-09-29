@@ -7,15 +7,25 @@
 #' @export
 #' @examples
 #' aNewBentoBox = filterByAbundance(bentoBox, column, prevalence = 0.0)
-filterByAbundance <- function (bentoBox, abundance = 0.75) {
+bentoRarefy <- function (bentoBox, subsampleSize = "min") {
 
   .bentoBox = bentoBox
 
-  countPerOtus = apply(.bentoBox@otutable, 1, sum)
-  minimumThreshold = sum(countPerOtus)*abundance
-  .bentoBox@otutable = .bentoBox@otutable[countPerOtus >= minimumThreshold, ]
-  .bentoBox@taxonomy = .bentoBox@taxonomy[countPerOtus >= minimumThreshold, ]
+  if (subsampleSize == "min"){
+    .subsampleSize = min(range(colSums(.bentoBox@otutable)))
+  } else if (is.numeric(subsampleSize)){
+    .subsampleSize = subsampleSize
+  } else {
+    out("Please enter either a number or \"min\"")
+  }
 
+  # Rarefy
+  set.seed(20160808)
+  cat(paste("Rarefying down to: ", .subsampleSize))
+  library(vegan)
+  .bentoBox@otutable = as.data.frame(t(rrarefy(t(.bentoBox@otutable), sample = .subsampleSize)))
+
+  # Remove zero-sum OTUs
   .zeroSumOTUs = which(!apply(.bentoBox@otutable, 1, FUN = function(x){ sum(x) == 0 }))
   .bentoBox@otutable = .bentoBox@otutable[.zeroSumOTUs, ]
   .bentoBox@taxonomy = .bentoBox@taxonomy[.zeroSumOTUs, ]
