@@ -10,10 +10,10 @@ poolReplicates <- function (bentoBox, column) {
 
   .bentoBox = bentoBox
 
-  .bentoBox = aggregate(t(.bentoBox@otutable), by=list(.bentoBox[[column]]), FUN=mean)
-  row.names(.bentoBox) = .bentoBox$Group.1
-  .bentoBox$Group.1 = NULL
-  .bentoBox = as.data.frame(t(.bentoBox))
+  .bentoBox@otutable = aggregate(t(.bentoBox@otutable), by=list(.bentoBox@metadata[[column]]), FUN=mean)
+  row.names(.bentoBox@otutable) = .bentoBox@otutable$Group.1
+  .bentoBox@otutable$Group.1 = NULL
+  .bentoBox@otutable = as.data.frame(t(.bentoBox@otutable))
 
   library(plyr)
   .bentoBox@metadata = ddply(.bentoBox@metadata, "replicateGroup", function(z) head(z,1))
