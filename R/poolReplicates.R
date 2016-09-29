@@ -32,3 +32,14 @@ poolReplicates <- function (bentoBox, column) {
   return(.bentoBox)
 
 }
+
+
+# otuBentoBox_16S_pooled = aggregate(t(otuBentoBox_16S@otutable), by=list(otuBentoBox_16S@metadata$replicateGroup), FUN=mean)
+# row.names(otuBentoBox_16S_pooled) = otuBentoBox_16S_pooled$Group.1
+# otuBentoBox_16S_pooled$Group.1 = NULL
+# otuBentoBox_16S_pooled = as.data.frame(t(otuBentoBox_16S_pooled))
+#
+# library(plyr)
+# mon = ddply(otuBentoBox_16S@metadata, "replicateGroup", function(z) head(z,1))
+# rownames(mon) = colnames(otuBentoBox_16S_pooled)
+
