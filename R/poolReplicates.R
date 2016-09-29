@@ -17,8 +17,7 @@ poolReplicates <- function (bentoBox, column) {
 
   library(plyr)
   .bentoBox@metadata = ddply(.bentoBox@metadata, "replicateGroup", function(z) head(z,1))
-
-  # rownames(.bentoBox@metadata) = colnames(.bentoBox@otutable)
+  rownames(.bentoBox@metadata) = colnames(.bentoBox@otutable)
 
   # Drop levels
   .bentoBox@otutable = droplevels(.bentoBox@otutable)
