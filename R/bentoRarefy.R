@@ -23,7 +23,7 @@ bentoRarefy <- function (bentoBox, subsampleSize = "min") {
   set.seed(20160808)
   cat(paste("Rarefying down to: ", .subsampleSize, "\n"))
   library(vegan)
-  .bentoBox@otutable = as.data.frame(t(rarefy(t(.bentoBox@otutable), sample = .subsampleSize)))
+  .bentoBox@otutable = as.data.frame(t(rrarefy(t(.bentoBox@otutable), sample = .subsampleSize)))
 
   # Remove zero-sum OTUs
   .zeroSumOTUs = which(!apply(.bentoBox@otutable, 1, FUN = function(x){ sum(x) == 0 }))
