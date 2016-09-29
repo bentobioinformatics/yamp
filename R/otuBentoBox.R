@@ -24,7 +24,7 @@ setMethod(f = "initialize",
 
             # otutable will usually have taxonomy column, so it will have one more column than metaexpmt.
             otutable = read.delim(file = f_otutable, sep = "\t", header = T, check.names = F, row.names = 1, quote = "#")
-            metadata = read.delim(file = f_filename, sep = "\t", header = T, check.names = F)
+            metadata = read.delim(file = f_filename, sep = "\t", header = T, check.names = F, row.names = 1)
             # dim(otutable); dim(metadata)
 
             # Taxonomy
