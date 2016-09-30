@@ -9,9 +9,9 @@ filterSamplesByIDFromBentoBox(bentoBox, samplesToRemove, type = "remove")
 \arguments{
 \item{bentoBox}{Your Bento Box}
 
-\item{type}{Remove or retain samples. Optinos: "remove", "remain" (default = "remove")}
+\item{samplesToRemove}{a vector of samples to remove from Your Bento Box}
 
-\item{sampleIDs}{a vector of samples to remove from Your Bento Box}
+\item{type}{Remove or retain samples. Optinos: "remove", "remain" (default = "remove")}
 }
 \description{
 This function filter samples from an OTU Bento Box
