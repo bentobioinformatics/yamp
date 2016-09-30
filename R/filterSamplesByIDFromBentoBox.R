@@ -1,14 +1,14 @@
-#' Filter samples from an OTU Bento Box
+#' Filter samples from an OTU Bento Box by ID
 #'
 #' This function filter samples from an OTU Bento Box
 #' @param bentoBox Your Bento Box
-#' @param samples a vector of samples to remove from Your Bento Box
+#' @param sampleIDs a vector of samples to remove from Your Bento Box
 #' @param type Remove or retain samples. Optinos: "remove", "remain" (default = "remove")
 #' @export
 #' @examples
-#' aNewBentoBox = filterSamplesFromBentoBox(aBentoBox, c("Sample1", "Sample2"), type = "remove")
+#' aNewBentoBox = filterSamplesByIDFromBentoBox(aBentoBox, c("Sample1", "Sample2"), type = "remove")
 
-filterSamplesFromBentoBox <- function (bentoBox, samplesToRemove, type = "remove") {
+filterSamplesByIDFromBentoBox <- function (bentoBox, samplesToRemove, type = "remove") {
 
   .bentoBox = bentoBox
 
