@@ -2,7 +2,7 @@
 #'
 #' This function filter samples from an OTU Bento Box
 #' @param bentoBox Your Bento Box
-#' @param sampleIDs a vector of samples to remove from Your Bento Box
+#' @param samplesToRemove a vector of samples to remove from Your Bento Box
 #' @param type Remove or retain samples. Optinos: "remove", "remain" (default = "remove")
 #' @export
 #' @examples
