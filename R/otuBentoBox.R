@@ -85,10 +85,12 @@ otuBentoBox <- function (otutable_filename, metadata_filename) {
 
 # Test
 # dataFile_otutable = c("~/Library/Mobile\ Documents/com~apple~CloudDocs/Project/ThamesSampling/04_Bioinformatics/ThamesWBS/16S/otu_table.txt")
-# dataFile_metadata = c("~/Library/Mobile\ Documents/com~apple~CloudDocs/Project/ThamesSampling/05_Analysis/ThamesWBS/metadata_combined.txt")
+# dataFile_metadata = c("~/Library/Mobile\ Documents/com~apple~CloudDocs/Project/ThamesSampling/04_Bioinformatics/ThamesWBS/ITS/metadata_combined.txt")
 # otuBentoBox_16S = otuBentoBox(dataFile_otutable, dataFile_metadata)
-
-
+# colnames(otuBentoBox_16S@otutable)
+# rownames(otuBentoBox_16S@metadata)
+# View(otuBentoBox_16S@otutable)
+# View(otuBentoBox_16S@metadata)
 
 
 
