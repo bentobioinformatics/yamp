@@ -27,9 +27,6 @@ setMethod(f = "initialize",
             metadata = read.delim(file = f_filename, sep = "\t", header = T, check.names = F, row.names = 1)
             # dim(otutable); dim(metadata)
 
-            # order metadata by otu colnames
-            metadata = metadata[colnames(otutable), ]
-
             # Taxonomy
             taxonomy = data.frame(taxonomy = otutable$taxonomy, row.names = rownames(otutable));
             taxonomy$taxonomy = (gsub("; ", ";", taxonomy$taxonomy))
@@ -37,6 +34,9 @@ setMethod(f = "initialize",
 
             # Remove taxonomy from OTU Table.
             otutable$taxonomy <- NULL
+
+            # order metadata by otu colnames
+            metadata = metadata[colnames(otutable), ]
 
             # Taxonomy into 7 ranks
             # install.packages(c("tidyr", "devtools"))
@@ -94,6 +94,9 @@ otuBentoBox <- function (otutable_filename, metadata_filename) {
 # rownames(otuBentoBox_ITS@metadata)
 # View(otuBentoBox_16S@otutable)
 # View(otuBentoBox_16S@metadata)
+#
+# otutable = read.delim(file = dataFile_otutable, sep = "\t", header = T, check.names = F, row.names = 1, quote = "#")
+# metadata = read.delim(file = dataFile_metadata, sep = "\t", header = T, check.names = F, row.names = 1)
 
 
 
