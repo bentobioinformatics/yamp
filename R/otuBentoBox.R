@@ -28,7 +28,7 @@ setMethod(f = "initialize",
             # dim(otutable); dim(metadata)
 
             # order metadata by otu colnames
-            metadata = metadata[colnames(otuBentoBox_ITS@otutable), ]
+            metadata = metadata[colnames(otutable), ]
 
             # Taxonomy
             taxonomy = data.frame(taxonomy = otutable$taxonomy, row.names = rownames(otutable));
