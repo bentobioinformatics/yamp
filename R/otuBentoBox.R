@@ -27,6 +27,9 @@ setMethod(f = "initialize",
             metadata = read.delim(file = f_filename, sep = "\t", header = T, check.names = F, row.names = 1)
             # dim(otutable); dim(metadata)
 
+            # order metadata by otu colnames
+            metadata = metadata[colnames(otuBentoBox_ITS@otutable), ]
+
             # Taxonomy
             taxonomy = data.frame(taxonomy = otutable$taxonomy, row.names = rownames(otutable));
             taxonomy$taxonomy = (gsub("; ", ";", taxonomy$taxonomy))
@@ -84,11 +87,11 @@ otuBentoBox <- function (otutable_filename, metadata_filename) {
 }
 
 # Test
-# dataFile_otutable = c("~/Library/Mobile\ Documents/com~apple~CloudDocs/Project/ThamesSampling/04_Bioinformatics/ThamesWBS/16S/otu_table.txt")
+# dataFile_otutable = c("~/Library/Mobile\ Documents/com~apple~CloudDocs/Project/ThamesSampling/04_Bioinformatics/ThamesWBS/ITS/otu_table.txt")
 # dataFile_metadata = c("~/Library/Mobile\ Documents/com~apple~CloudDocs/Project/ThamesSampling/04_Bioinformatics/ThamesWBS/ITS/metadata_combined.txt")
-# otuBentoBox_16S = otuBentoBox(dataFile_otutable, dataFile_metadata)
-# colnames(otuBentoBox_16S@otutable)
-# rownames(otuBentoBox_16S@metadata)
+# otuBentoBox_ITS = otuBentoBox(dataFile_otutable, dataFile_metadata)
+# colnames(otuBentoBox_ITS@otutable)
+# rownames(otuBentoBox_ITS@metadata)
 # View(otuBentoBox_16S@otutable)
 # View(otuBentoBox_16S@metadata)
 
