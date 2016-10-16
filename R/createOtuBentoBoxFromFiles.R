@@ -1,13 +1,11 @@
 #' createOtuBentoBoxFromFiles
 #'
-#' This function filters taxa from an OTU Bento Box
-#' @param bentoBox Your Bento Box
-#' @param classificationLevel Your classificationLevel
-#' @param nameToRemove Names to remove
-#' @param type Remove or retain samples. Optinos: "remove", "remain" (default = "remove")
+#' This function creates an OtuBentoBox from two file inputs: Otu table and a Meta data.
+#' @param dataFile_otutable Otu table file
+#' @param dataFile_metadata Meta data file
 #' @export
 #' @examples
-#' aNewBentoBox = createOtuBentoBoxFromFiles(aBentoBox, "k", "k__Bacteria", type = "remove")
+#' aNewBentoBox = createOtuBentoBoxFromFiles(dataFile_otutable, dataFile_metadata)
 createOtuBentoBoxFromFiles <- function (f_otutable, f_metadata) {
 
   cat("Starting createOtuBentoBoxFromFiles...\n")
