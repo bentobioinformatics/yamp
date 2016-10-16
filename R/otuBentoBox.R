@@ -19,8 +19,6 @@ setMethod(f = "initialize",
           signature = "otuBentoBox",
           definition = function(.Object, otutable, metadata, taxonomy)  {
 
-            print("Checking integrity...")
-
             # Check integrity
             otutable.numberofsamples = ncol(otutable)
             otutable.numberofotus = nrow(otutable)
@@ -52,7 +50,6 @@ setMethod(f = "initialize",
 #' @rdname otuBentoBox-class
 #' @export
 otuBentoBox <- function (otutable, metadata, taxonomy) {
-  print("yo")
   new("otuBentoBox", otutable, metadata, taxonomy)
 }
 
