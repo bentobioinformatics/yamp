@@ -1,6 +1,6 @@
 #' Class otuBentoBox
 #'
-#' Class \code{otuBentoBox} defines a gas sensor device.
+#' Class \code{otuBentoBox} defines an OTU Bento Box class
 #'
 #' @name otuBentoBox-class
 #' @rdname otuBentoBox-class
@@ -18,38 +18,7 @@ setClass("otuBentoBox",
 #' @rdname otuBentoBox-class
 setMethod(f = "initialize",
           signature = "otuBentoBox",
-          definition = function(.Object, f_otutable, f_filename)  {
-
-            if (missing(f_otutable) || missing(f_filename)) stop("input missing.")
-
-            # otutable will usually have taxonomy column, so it will have one more column than metaexpmt.
-            otutable = read.delim(file = f_otutable, sep = "\t", header = T, check.names = F, row.names = 1, quote = "#")
-            metadata = read.delim(file = f_filename, sep = "\t", header = T, check.names = F, row.names = 1)
-            # dim(otutable); dim(metadata)
-
-            # Taxonomy
-            taxonomy = data.frame(taxonomy = otutable$taxonomy, row.names = rownames(otutable));
-            taxonomy$taxonomy = (gsub("; ", ";", taxonomy$taxonomy))
-            taxonomy$taxonomy = (gsub("\\.", "", taxonomy$taxonomy))
-
-            # Remove taxonomy from OTU Table.
-            otutable$taxonomy <- NULL
-
-            # order metadata by otu colnames
-            metadata = metadata[colnames(otutable), ]
-
-            # Taxonomy into 7 ranks
-            # install.packages(c("tidyr", "devtools"))
-            library(tidyr)
-            taxonomy = separate(taxonomy, taxonomy , into = c("k", "p", "c", "o", "f", "g", "s"), sep = ";", extra = "drop", fill = "right")
-
-            # Convert NA to unclassified
-            taxonomy$p[is.na(taxonomy$p)] = "p__"
-            taxonomy$c[is.na(taxonomy$c)] = "c__"
-            taxonomy$o[is.na(taxonomy$o)] = "o__"
-            taxonomy$f[is.na(taxonomy$f)] = "f__"
-            taxonomy$g[is.na(taxonomy$g)] = "g__"
-            taxonomy$s[is.na(taxonomy$s)] = "s__"
+          definition = function(.Object, otutable, metadata, taxonomy)  {
 
             # Check integrity
             otutable.numberofsamples = ncol(otutable)
@@ -82,22 +51,7 @@ setMethod(f = "initialize",
 #' @name otuBentoBox
 #' @rdname otuBentoBox-class
 #' @export
-otuBentoBox <- function (otutable_filename, metadata_filename) {
-  new("otuBentoBox", otutable_filename, metadata_filename)
+otuBentoBox <- function (otutable, metadata, taxonomy) {
+  new("otuBentoBox", otutable, metadata, taxonomy)
 }
-
-# Test
-# dataFile_otutable = c("~/Library/Mobile\ Documents/com~apple~CloudDocs/Project/ThamesSampling/04_Bioinformatics/ThamesWBS/ITS/otu_table.txt")
-# dataFile_metadata = c("~/Library/Mobile\ Documents/com~apple~CloudDocs/Project/ThamesSampling/04_Bioinformatics/ThamesWBS/ITS/metadata_combined.txt")
-# otuBentoBox_ITS = otuBentoBox(dataFile_otutable, dataFile_metadata)
-# colnames(otuBentoBox_ITS@otutable)
-# rownames(otuBentoBox_ITS@metadata)
-# View(otuBentoBox_16S@otutable)
-# View(otuBentoBox_16S@metadata)
-#
-# otutable = read.delim(file = dataFile_otutable, sep = "\t", header = T, check.names = F, row.names = 1, quote = "#")
-# metadata = read.delim(file = dataFile_metadata, sep = "\t", header = T, check.names = F, row.names = 1)
-
-
-
 

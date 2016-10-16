@@ -6,12 +6,12 @@
 \alias{otuBentoBox-class}
 \title{Class otuBentoBox}
 \usage{
-\S4method{initialize}{otuBentoBox}(.Object, f_otutable, f_filename)
+\S4method{initialize}{otuBentoBox}(.Object, otutable, metadata, taxonomy)
 
-otuBentoBox(otutable_filename, metadata_filename)
+otuBentoBox(otutable, metadata, taxonomy)
 }
 \description{
-Class \code{otuBentoBox} defines a gas sensor device.
+Class \code{otuBentoBox} defines an OTU Bento Box class
 
 Constructor method of otuBentoBox Class.
 
