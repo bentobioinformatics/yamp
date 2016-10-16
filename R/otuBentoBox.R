@@ -52,6 +52,7 @@ setMethod(f = "initialize",
 #' @rdname otuBentoBox-class
 #' @export
 otuBentoBox <- function (otutable, metadata, taxonomy) {
+  print("yo")
   new("otuBentoBox", otutable, metadata, taxonomy)
 }
 
