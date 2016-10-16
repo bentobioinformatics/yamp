@@ -6,7 +6,7 @@
 #' @param abundance abundance (default = 0.0)
 #' @export
 #' @examples
-#' aNewBentoBox = filterByAbundance(bentoBox, column, prevalence = 0.0)
+#' aNewBentoBox = filterByAbundance(bentoBox, abundance = 0.5)
 filterByAbundance <- function (bentoBox, abundance = 0.75) {
 
   .bentoBox = bentoBox

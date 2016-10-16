@@ -11,7 +11,6 @@ setClass("otuBentoBox",
                    taxonomy = "data.frame")
 )
 
-
 #' Constructor method of otuBentoBox Class.
 #'
 #' @name otuBentoBox
