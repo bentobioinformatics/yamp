@@ -19,6 +19,8 @@ setMethod(f = "initialize",
           signature = "otuBentoBox",
           definition = function(.Object, otutable, metadata, taxonomy)  {
 
+            print("Checking integrity...")
+
             # Check integrity
             otutable.numberofsamples = ncol(otutable)
             otutable.numberofotus = nrow(otutable)

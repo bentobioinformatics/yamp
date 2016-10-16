@@ -10,6 +10,8 @@
 #' aNewBentoBox = createOtuBentoBoxFromFiles(aBentoBox, "k", "k__Bacteria", type = "remove")
 createOtuBentoBoxFromFiles <- function (f_otutable, f_metadata) {
 
+  print("Starting createOtuBentoBoxFromFiles...")
+
   if (missing(f_otutable) || missing(f_metadata)) stop("input missing.")
 
   # otutable will usually have taxonomy column, so it will have one more column than metaexpmt.
