@@ -14,11 +14,11 @@ filterOTUsFromBentoBox <- function (bentoBox, OTUsToRemove, type = "remove") {
 
   # Filter
   if (type == "remove") {
-    .bentoBox@otutable = bentoBox@otutable[!rownames(.bentoBox@otutable) %in% OTUsToRemove, ]
-    .bentoBox@taxonomy = bentoBox@taxonomy[!rownames(.bentoBox@otutable) %in% OTUsToRemove, ]
+    .bentoBox@otutable = bentoBox@otutable[!rownames(bentoBox@otutable) %in% OTUsToRemove, ]
+    .bentoBox@taxonomy = bentoBox@taxonomy[!rownames(bentoBox@taxonomy) %in% OTUsToRemove, ]
   } else if (type == "retain") {
-    .bentoBox@otutable = bentoBox@otutable[rownames(.bentoBox@otutable) %in% OTUsToRemove, ]
-    .bentoBox@taxonomy = bentoBox@taxonomy[rownames(.bentoBox@otutable) %in% OTUsToRemove, ]
+    .bentoBox@otutable = bentoBox@otutable[rownames(bentoBox@otutable) %in% OTUsToRemove, ]
+    .bentoBox@taxonomy = bentoBox@taxonomy[rownames(bentoBox@taxonomy) %in% OTUsToRemove, ]
   } else {
     stop("Type needs to be either remove or retain")
   }
