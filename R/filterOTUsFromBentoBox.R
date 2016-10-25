@@ -1,8 +1,8 @@
-#' Filter samples from an OTU Bento Box by ID
+#' Filter OTUs from an OTU Bento Box
 #'
-#' This function filter samples from an OTU Bento Box
+#' This function filters OTUs from an OTU Bento Box
 #' @param bentoBox Your Bento Box
-#' @param samplesToRemove a vector of samples to remove from Your Bento Box
+#' @param OTUsToRemove a vector of samples to remove from Your Bento Box
 #' @param type Remove or retain samples. Optinos: "remove", "remain" (default = "remove")
 #' @export
 #' @examples
@@ -14,11 +14,11 @@ filterOTUsFromBentoBox <- function (bentoBox, OTUsToRemove, type = "remove") {
 
   # Filter
   if (type == "remove") {
-    .bentoBox@otutable = .bentoBox@otutable[!rownames(.bentoBox@otutable) %in% OTUsToRemove, ]
-    .bentoBox@taxonomy = .bentoBox@taxonomy[!rownames(.bentoBox@otutable) %in% OTUsToRemove, ]
+    .bentoBox@otutable = bentoBox@otutable[!rownames(.bentoBox@otutable) %in% OTUsToRemove, ]
+    .bentoBox@taxonomy = bentoBox@taxonomy[!rownames(.bentoBox@otutable) %in% OTUsToRemove, ]
   } else if (type == "retain") {
-    .bentoBox@otutable = .bentoBox@otutable[rownames(.bentoBox@otutable) %in% OTUsToRemove, ]
-    .bentoBox@taxonomy = .bentoBox@taxonomy[rownames(.bentoBox@otutable) %in% OTUsToRemove, ]
+    .bentoBox@otutable = bentoBox@otutable[rownames(.bentoBox@otutable) %in% OTUsToRemove, ]
+    .bentoBox@taxonomy = bentoBox@taxonomy[rownames(.bentoBox@otutable) %in% OTUsToRemove, ]
   } else {
     stop("Type needs to be either remove or retain")
   }
