@@ -16,6 +16,6 @@ This function will remove OTUs below the total abundance of x as a fraction, i.e
 See http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3531572/ if interested in finding out which threshold to use
 }
 \examples{
-aNewBentoBox = filterByAbundance(bentoBox, column, prevalence = 0.0)
+aNewBentoBox = filterByAbundance(bentoBox, abundance = 0.5)
 }
 

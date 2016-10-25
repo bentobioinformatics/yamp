@@ -7,18 +7,14 @@
 createOtuBentoBoxFromFiles(f_otutable, f_metadata)
 }
 \arguments{
-\item{bentoBox}{Your Bento Box}
+\item{dataFile_otutable}{Otu table file}
 
-\item{classificationLevel}{Your classificationLevel}
-
-\item{nameToRemove}{Names to remove}
-
-\item{type}{Remove or retain samples. Optinos: "remove", "remain" (default = "remove")}
+\item{dataFile_metadata}{Meta data file}
 }
 \description{
-This function filters taxa from an OTU Bento Box
+This function creates an OtuBentoBox from two file inputs: Otu table and a Meta data.
 }
 \examples{
-aNewBentoBox = createOtuBentoBoxFromFiles(aBentoBox, "k", "k__Bacteria", type = "remove")
+aNewBentoBox = createOtuBentoBoxFromFiles(dataFile_otutable, dataFile_metadata)
 }
 
