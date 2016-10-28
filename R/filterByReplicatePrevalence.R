@@ -6,11 +6,11 @@
 #' This function will deal with this situation! Choose prevalence = 0.5 to achieve this.
 #' @param bentoBox Your Bento Box
 #' @param column Column in metadata to group replicates
-#' @param prevalence prevalence. So, 0.5 means an OTU which is present in less than 50\% of all replicates will be removed.
+#' @param threshold prevalence (default 0.75). So, 0.5 means an OTU which is present in less than 50\% of all replicates will be removed.
 #' @export
 #' @examples
 #' aNewBentoBox = filterByReplicatePrevalence(bentoBox, column, prevalence = 0.5)
-filterByReplicatePrevalence <- function (bentoBox, column, prevalence = 0.75) {
+filterByReplicatePrevalence <- function (bentoBox, column, threshold = 0.75) {
 
   .bentoBox = bentoBox
 
@@ -19,7 +19,7 @@ filterByReplicatePrevalence <- function (bentoBox, column, prevalence = 0.75) {
     otutable_replicateGroup <- .bentoBox@otutable[, .bentoBox@metadata$replicateGroup == .replicateGroup]
     if (!is.null(dim(otutable_replicateGroup))) {
       prevalence = apply(otutable_replicateGroup != 0, 1, mean)
-      otutable_replicateGroup[prevalence < 0.75, ] = 0
+      otutable_replicateGroup[prevalence < threshold, ] = 0
       .bentoBox@otutable[, .bentoBox@metadata$replicateGroup == .replicateGroup] <- otutable_replicateGroup
     }
   }
