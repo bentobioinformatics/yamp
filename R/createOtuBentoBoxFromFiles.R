@@ -13,7 +13,7 @@ createOtuBentoBoxFromFiles <- function (f_otutable, f_metadata) {
   if (missing(f_otutable) || missing(f_metadata)) stop("input missing.")
 
   # otutable will usually have taxonomy column, so it will have one more column than metaexpmt.
-  otutable = read.delim(file = f_otutable, sep = "\t", header = T, check.names = F, row.names = 1, quote = "#")
+  otutable = read.delim(file = f_otutable, sep = "\t", header = T, check.names = F, row.names = 1, quote = "\"", skip = 1)
   metadata = read.delim(file = f_metadata, sep = "\t", header = T, check.names = F, row.names = 1)
   # dim(otutable); dim(metadata)
 
