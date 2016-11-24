@@ -1,15 +1,17 @@
 #' Filter out OTUs with less than x\% prevalence
 #'
 #' Say you have collected 10 replicates.
-#' Only 5 of 10 of the replicates have a particular OTU.
-#' You want to retain such OTUs but remove those with less than 5.
-#' This function will deal with this situation! Choose prevalence = 0.5 to achieve this.
+#' Only 4 of 10 of the replicates have a particular OTU.
+#' Is that OTU a good representative of your sample?
+#' When would you say that OTU represents your sample?
+#' Let's say you want to retain OTUs which are found in more than 75% of the replicates, then this function will deal with this situation.
+#' Choose prv = 0.75 to achieve this.
 #' @param bentoBox Your Bento Box
 #' @param column Column in metadata to group replicates
-#' @param threshold prevalence (default 0.75). So, 0.5 means an OTU which is present in less than 50\% of all replicates will be removed.
+#' @param threshold prv (default 0.75). So, 0.5 means an OTU which is present in less than 50\% of all replicates will be removed.
 #' @export
 #' @examples
-#' aNewBentoBox = filterByReplicatePrevalence(bentoBox, column, prevalence = 0.5)
+#' aNewBentoBox = filterByReplicatePrevalence(bentoBox, column, prv = 0.5)
 filterByReplicatePrevalence <- function (bentoBox, column, prv = 0.75) {
 
   .bentoBox = bentoBox
