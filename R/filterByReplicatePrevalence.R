@@ -16,17 +16,17 @@ filterByReplicatePrevalence <- function (bentoBox, column, threshold = 0.75) {
 
   for (.replicateGroup in levels(.bentoBox@metadata[[column]])) {
     cat(paste("processing:", .replicateGroup, "\n"))
-    otutable_replicateGroup <- .bentoBox@otutable[, .bentoBox@metadata$replicateGroup == .replicateGroup]
+    otutable_replicateGroup = .bentoBox@otutable[, .bentoBox@metadata$replicateGroup == .replicateGroup, drop = FALSE]
     if (!is.null(dim(otutable_replicateGroup))) {
       prevalence = apply(otutable_replicateGroup != 0, 1, mean)
       otutable_replicateGroup[prevalence < threshold, ] = 0
-      .bentoBox@otutable[, .bentoBox@metadata$replicateGroup == .replicateGroup] <- otutable_replicateGroup
+      .bentoBox@otutable[, .bentoBox@metadata$replicateGroup == .replicateGroup, drop = FALSE] <- otutable_replicateGroup
     }
   }
 
   .zeroSumOTUs = which(!apply(.bentoBox@otutable, 1, FUN = function(x){ sum(x) == 0 }))
-  # .bentoBox@otutable = .bentoBox@otutable[.zeroSumOTUs, ]
-  # .bentoBox@taxonomy = .bentoBox@taxonomy[.zeroSumOTUs, ]
+  .bentoBox@otutable = .bentoBox@otutable[.zeroSumOTUs, , drop = FALSE]
+  .bentoBox@taxonomy = .bentoBox@taxonomy[.zeroSumOTUs, , drop = FALSE]
 
   # Drop levels
   .bentoBox@otutable = droplevels(.bentoBox@otutable)

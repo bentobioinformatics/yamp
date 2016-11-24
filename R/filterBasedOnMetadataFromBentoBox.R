@@ -15,19 +15,19 @@ filterBasedOnMetadataFromBentoBox <- function (bentoBox, column, termsToRetain, 
 
   # Filter
   if (type == "remove") {
-    .bentoBox@otutable = bentoBox@otutable[, !bentoBox@metadata[[column]] %in% termsToRetain]
-    .bentoBox@metadata = bentoBox@metadata[!bentoBox@metadata[[column]] %in% termsToRetain, ]
+    .bentoBox@otutable = bentoBox@otutable[, !bentoBox@metadata[[column]] %in% termsToRetain, drop = FALSE]
+    .bentoBox@metadata = bentoBox@metadata[!bentoBox@metadata[[column]] %in% termsToRetain, , drop = FALSE]
   } else if (type == "retain") {
-    .bentoBox@otutable = bentoBox@otutable[, bentoBox@metadata[[column]] %in% termsToRetain]
-    .bentoBox@metadata = bentoBox@metadata[bentoBox@metadata[[column]] %in% termsToRetain, ]
+    .bentoBox@otutable = bentoBox@otutable[, bentoBox@metadata[[column]] %in% termsToRetain, drop = FALSE]
+    .bentoBox@metadata = bentoBox@metadata[bentoBox@metadata[[column]] %in% termsToRetain, , drop = FALSE]
   } else {
     stop("type needs to be either remove or retain")
   }
 
   # Remove zero-sum OTUs
   .zeroSumOTUs = which(!apply(.bentoBox@otutable, 1, FUN = function(x){ sum(x) == 0 }))
-  .bentoBox@otutable = .bentoBox@otutable[.zeroSumOTUs, ]
-  .bentoBox@taxonomy = .bentoBox@taxonomy[.zeroSumOTUs, ]
+  .bentoBox@otutable = .bentoBox@otutable[.zeroSumOTUs, , drop = FALSE]
+  .bentoBox@taxonomy = .bentoBox@taxonomy[.zeroSumOTUs, , drop = FALSE]
 
   # Drop levels
   .bentoBox@otutable = droplevels(.bentoBox@otutable)

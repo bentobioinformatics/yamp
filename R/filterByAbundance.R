@@ -13,12 +13,12 @@ filterByAbundance <- function (bentoBox, abundance = 0.75) {
 
   countPerOtus = apply(.bentoBox@otutable, 1, sum)
   minimumThreshold = sum(countPerOtus)*abundance
-  .bentoBox@otutable = .bentoBox@otutable[countPerOtus >= minimumThreshold, ]
-  .bentoBox@taxonomy = .bentoBox@taxonomy[countPerOtus >= minimumThreshold, ]
+  .bentoBox@otutable = .bentoBox@otutable[countPerOtus >= minimumThreshold, , drop = FALSE]
+  .bentoBox@taxonomy = .bentoBox@taxonomy[countPerOtus >= minimumThreshold, , drop = FALSE]
 
   .zeroSumOTUs = which(!apply(.bentoBox@otutable, 1, FUN = function(x){ sum(x) == 0 }))
-  .bentoBox@otutable = .bentoBox@otutable[.zeroSumOTUs, ]
-  .bentoBox@taxonomy = .bentoBox@taxonomy[.zeroSumOTUs, ]
+  .bentoBox@otutable = .bentoBox@otutable[.zeroSumOTUs, , drop = FALSE]
+  .bentoBox@taxonomy = .bentoBox@taxonomy[.zeroSumOTUs, , drop = FALSE]
 
   # Drop levels
   .bentoBox@otutable = droplevels(.bentoBox@otutable)

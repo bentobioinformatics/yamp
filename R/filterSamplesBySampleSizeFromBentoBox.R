@@ -14,19 +14,19 @@ filterSamplesBySampleSizeFromBentoBox <- function (bentoBox, sampleSize, type = 
 
   # Filter
   if (type == "remove") {
-    .bentoBox@otutable = bentoBox@otutable[ ,colSums(bentoBox@otutable) >= sampleSize]
-    .bentoBox@metadata = bentoBox@metadata[colSums(bentoBox@otutable) >= sampleSize, ]
+    .bentoBox@otutable = bentoBox@otutable[ ,colSums(bentoBox@otutable) >= sampleSize, drop = FALSE]
+    .bentoBox@metadata = bentoBox@metadata[colSums(bentoBox@otutable) >= sampleSize, , drop = FALSE]
   } else if (type == "retain") {
-    .bentoBox@otutable = bentoBox@otutable[ ,colSums(bentoBox@otutable) <= sampleSize]
-    .bentoBox@metadata = bentoBox@metadata[colSums(bentoBox@otutable) <= sampleSize, ]
+    .bentoBox@otutable = bentoBox@otutable[ ,colSums(bentoBox@otutable) <= sampleSize, drop = FALSE]
+    .bentoBox@metadata = bentoBox@metadata[colSums(bentoBox@otutable) <= sampleSize, , drop = FALSE]
   } else {
     stop("Type needs to be either remove or retain")
   }
 
   # Remove zero-sum OTUs
   .zeroSumOTUs = which(!apply(.bentoBox@otutable, 1, FUN = function(x){ sum(x) == 0 }))
-  .bentoBox@otutable = .bentoBox@otutable[.zeroSumOTUs, ]
-  .bentoBox@taxonomy = .bentoBox@taxonomy[.zeroSumOTUs, ]
+  .bentoBox@otutable = .bentoBox@otutable[.zeroSumOTUs, , drop = FALSE]
+  .bentoBox@taxonomy = .bentoBox@taxonomy[.zeroSumOTUs, , drop = FALSE]
 
   # Clean
   .bentoBox@otutable = droplevels(.bentoBox@otutable)

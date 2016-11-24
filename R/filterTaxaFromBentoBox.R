@@ -17,11 +17,11 @@ filterTaxaFromBentoBox <- function (bentoBox, classificationLevel, nameToRemove,
   OTUsToExclude = rownames(bentoBox@taxonomy[bentoBox@taxonomy[[classificationLevel]] == nameToRemove, ])
 
   if (type == "remove") {
-    .bentoBox@otutable = bentoBox@otutable[!rownames(bentoBox@otutable) %in% OTUsToExclude, ]
-    .bentoBox@taxonomy = bentoBox@taxonomy[!rownames(bentoBox@taxonomy) %in% OTUsToExclude, ]
+    .bentoBox@otutable = bentoBox@otutable[!rownames(bentoBox@otutable) %in% OTUsToExclude, , drop = FALSE]
+    .bentoBox@taxonomy = bentoBox@taxonomy[!rownames(bentoBox@taxonomy) %in% OTUsToExclude, , drop = FALSE]
   } else if (type == "retain") {
-    .bentoBox@otutable = bentoBox@otutable[rownames(bentoBox@otutable) %in% OTUsToExclude, ]
-    .bentoBox@taxonomy = bentoBox@taxonomy[rownames(bentoBox@taxonomy) %in% OTUsToExclude, ]
+    .bentoBox@otutable = bentoBox@otutable[rownames(bentoBox@otutable) %in% OTUsToExclude, , drop = FALSE]
+    .bentoBox@taxonomy = bentoBox@taxonomy[rownames(bentoBox@taxonomy) %in% OTUsToExclude, , drop = FALSE]
   } else {
     stop("Type needs to be either remove or retain")
   }
