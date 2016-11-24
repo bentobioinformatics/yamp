@@ -14,11 +14,11 @@ filterSamplesByIDFromBentoBox <- function (bentoBox, samplesToRemove, type = "re
 
   # Filter
   if (type == "remove") {
-    .bentoBox@otutable = bentoBox@otutable[, !colnames(bentoBox@otutable) %in% samplesToRemove]
-    .bentoBox@metadata = bentoBox@metadata[!colnames(bentoBox@otutable) %in% samplesToRemove, ]
+    .bentoBox@otutable = bentoBox@otutable[, which(!colnames(bentoBox@otutable) %in% samplesToRemove)]
+    .bentoBox@metadata = bentoBox@metadata[which(!colnames(bentoBox@otutable) %in% samplesToRemove), ]
   } else if (type == "retain") {
-    .bentoBox@otutable = bentoBox@otutable[, colnames(bentoBox@otutable) %in% samplesToRemove]
-    .bentoBox@metadata = bentoBox@metadata[colnames(bentoBox@otutable) %in% samplesToRemove, ]
+    .bentoBox@otutable = bentoBox@otutable[, which(colnames(bentoBox@otutable) %in% samplesToRemove)]
+    .bentoBox@metadata = bentoBox@metadata[which(colnames(bentoBox@otutable) %in% samplesToRemove), ]
   } else {
     stop("Type needs to be either remove or retain")
   }
@@ -36,7 +36,7 @@ filterSamplesByIDFromBentoBox <- function (bentoBox, samplesToRemove, type = "re
   cat(paste("[otutable] Number of OTUs   :", dim(.bentoBox@otutable)[1], "\n"))
   cat(paste("           Number of samples:", dim(.bentoBox@otutable)[2], "\n"))
   cat(paste("[metadata] Number of samples:", dim(.bentoBox@metadata)[1], "\n"))
-  cat(paste("[taxonomy] Number of OTUs   :",    dim(.bentoBox@taxonomy)[1], "\n"))
+  cat(paste("[taxonomy] Number of OTUs   :", dim(.bentoBox@taxonomy)[1], "\n"))
   return(.bentoBox)
 
 }
