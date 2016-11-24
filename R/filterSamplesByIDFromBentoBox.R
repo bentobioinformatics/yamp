@@ -25,20 +25,20 @@ filterSamplesByIDFromBentoBox <- function (bentoBox, samplesToRemove, type = "re
     stop("Type needs to be either remove or retain")
   }
 
-  # Remove zero-sum OTUs
-  .zeroSumOTUs = which(!apply(.bentoBox@otutable, 1, FUN = function(x){ sum(x) == 0 }))
-  .bentoBox@otutable = .bentoBox@otutable[.zeroSumOTUs, ]
-  .bentoBox@taxonomy = .bentoBox@taxonomy[.zeroSumOTUs, ]
-
-  # Clean
-  .bentoBox@otutable = droplevels(.bentoBox@otutable)
-  .bentoBox@metadata = droplevels(.bentoBox@metadata)
-
-  # Output
-  cat(paste("[otutable] Number of OTUs   :", dim(.bentoBox@otutable)[1], "\n"))
-  cat(paste("           Number of samples:", dim(.bentoBox@otutable)[2], "\n"))
-  cat(paste("[metadata] Number of samples:", dim(.bentoBox@metadata)[1], "\n"))
-  cat(paste("[taxonomy] Number of OTUs   :", dim(.bentoBox@taxonomy)[1], "\n"))
+  # # Remove zero-sum OTUs
+  # .zeroSumOTUs = which(!apply(.bentoBox@otutable, 1, FUN = function(x){ sum(x) == 0 }))
+  # .bentoBox@otutable = .bentoBox@otutable[.zeroSumOTUs, ]
+  # .bentoBox@taxonomy = .bentoBox@taxonomy[.zeroSumOTUs, ]
+  #
+  # # Clean
+  # .bentoBox@otutable = droplevels(.bentoBox@otutable)
+  # .bentoBox@metadata = droplevels(.bentoBox@metadata)
+  #
+  # # Output
+  # cat(paste("[otutable] Number of OTUs   :", dim(.bentoBox@otutable)[1], "\n"))
+  # cat(paste("           Number of samples:", dim(.bentoBox@otutable)[2], "\n"))
+  # cat(paste("[metadata] Number of samples:", dim(.bentoBox@metadata)[1], "\n"))
+  # cat(paste("[taxonomy] Number of OTUs   :", dim(.bentoBox@taxonomy)[1], "\n"))
   return(.bentoBox)
 
 }
