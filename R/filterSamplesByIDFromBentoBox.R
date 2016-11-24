@@ -10,6 +10,8 @@
 
 filterSamplesByIDFromBentoBox <- function (bentoBox, samplesToRemove, type = "remove") {
 
+  print("filtering")
+
   .bentoBox = bentoBox
 
   # Filter
