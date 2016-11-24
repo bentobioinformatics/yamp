@@ -16,11 +16,11 @@ filterSamplesByIDFromBentoBox <- function (bentoBox, samplesToRemove, type = "re
 
   # Filter
   if (type == "remove") {
-    .bentoBox@otutable = bentoBox@otutable[, which(!colnames(bentoBox@otutable) %in% samplesToRemove)]
-    .bentoBox@metadata = bentoBox@metadata[which(!colnames(bentoBox@otutable) %in% samplesToRemove), ]
+    .bentoBox@otutable = bentoBox@otutable[, !colnames(bentoBox@otutable) %in% samplesToRemove, drop = FALSE]
+    .bentoBox@metadata = bentoBox@metadata[!colnames(bentoBox@otutable) %in% samplesToRemove, drop = FALSE]
   } else if (type == "retain") {
-    .bentoBox@otutable = bentoBox@otutable[, which(colnames(bentoBox@otutable) %in% samplesToRemove)]
-    .bentoBox@metadata = bentoBox@metadata[which(colnames(bentoBox@otutable) %in% samplesToRemove), ]
+    .bentoBox@otutable = bentoBox@otutable[, colnames(bentoBox@otutable) %in% samplesToRemove, drop = FALSE]
+    .bentoBox@metadata = bentoBox@metadata[colnames(bentoBox@otutable) %in% samplesToRemove, drop = FALSE]
   } else {
     stop("Type needs to be either remove or retain")
   }
